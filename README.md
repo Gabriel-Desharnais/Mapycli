@@ -30,7 +30,7 @@ To create a session you should do:
 ``` python
 se = mapycli.service.session()
 ```
-Here `service` should be replaced by the name of the service *e.g.* `mapcli.WMS.session()`.
+Here `service` should be replaced by the name of the service *e.g.* `mapycli.WMS.session()`.
 This opperation will create an empty session.
 
 If you want to create a session and to a getcapabilities at the same time:
@@ -66,10 +66,35 @@ This opperation will not touch other parameters set in session.
 
 ### WMS
 **not available yet**
-This section will list every WMS supported opperations available. Note that wms session object support all of these opperations.
-
-#### Exceptions
+This section will list every WMS supported opperations available. Note that wms session object support all of these opperations e.g.
+The function call
+``` python
+mapycli.wms.getcapabilities(*args)
+```
+will translate to
+``` python
+se.getcapabilities(*args)
+```
 #### GetCapabilities
+usage
+``` python
+getCapRes = mapycli.wms.getcapabilities(url,[service="WMS",request="GetCapabilities",version="1.3.0",format="application/vnd.ogc.se_xml",**kargs])
+```
+every kargs given to getcapabilities will be url encoded and passed directly to the server. The function returns a getcapabilitiesResponse object. If the format is the default one mapycli will parse the responce otherwise you the only functionality provided by the getcapabilitiesResponse object will be the
+``` python
+Res = getCapRes.Responce
+```
+This will return you the **requests** responce
+
+If you want to go threw the hierarchy of the responce you can
+``` python
+val = getCapRes.Capabilities.Service.Title
+```
+
+If you want to have the list of the layer name you can
+``` python
+getCapRes.layers
+```
 #### GetMap
 #### GetFeatureInfo
 #### DescribeLayer
