@@ -1,5 +1,5 @@
 # Mapycli
-Python 3 package to do client operations on web service respecting Open Geospatial Consortium (OGC) standard.
+Python 3 package to do client operations on web service respecting Open Geospatial Consortium (OGC) standard. This is the documentation for version 0.0.0.1 (a.k.a really really alpha).
 
 ## How to install
 Sometime in the future the package will be on pypi and there will be a *.deb* or *.rpm* package, but for now you will need to do
@@ -7,10 +7,11 @@ Sometime in the future the package will be on pypi and there will be a *.deb* or
 python3 setup.py install
 ```
 ## Compatibilitie
-This package is develloped and tested on a linux machine it should work on other platform, but there are no guaranties and no support for it. This is a python3 package since python2 end of life is supposed to be on January the first 2020, I will neighter devellope nor support for python2 (python2 needs to die and thus I don't believe in it anymore).
+This package is develloped and tested on a linux machine with python 3.5 it should work on other platform, but there are no guaranties and no support for it. This is a python3 package since python2 end of life is supposed to be on January the first 2020, I will neighter devellope nor support for python2 (python2 needs to die and thus I don't believe in it anymore).
 
 ## Dependencies
 This is a list of package that **Mapycli** relies on.
+- Requests
 
 ## License
 This package is under MIT license, for more information look in **LICENSE** file.
