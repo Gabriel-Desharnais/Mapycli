@@ -25,6 +25,7 @@ import mapycli
 ```
 ### Session
 **Not available yet**
+
 Although the creation of a session is not mandatory to do requests, it is highly recommanded to use them because it add a lot of functionality and they can make your life easier. A session is an object that will keep in memory some parameters and most importantly the information about ressource available on the server. Session are service specific ('WMS','WFS','WCS','WPS','CWS')
 #### Creating a session
 To create a session you should do:
@@ -67,6 +68,7 @@ This opperation will not touch other parameters set in session.
 
 ### WMS
 **not available yet**
+
 This section will list every WMS supported opperations available. Note that wms session object support all of these opperations e.g.
 The function call
 ``` python
