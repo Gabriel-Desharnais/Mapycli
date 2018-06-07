@@ -86,27 +86,29 @@ The default values are:
 This section will list every WMS supported opperations available. Note that wms session object support all of these opperations e.g.
 The function call
 ``` python
-mapycli.wms.getcapabilities(*args)
+mapycli.wms.getcapabilities(*args,**kargs)
 ```
 will translate to
 ``` python
-se.getcapabilities(*args)
+se.getcapabilities(*args,**args)
 ```
+---
 **Note:**
 
 It is important to note that since *mapycli* is using *requests* under the houd you can always add any parameters to your request (usefull for vendor support) and you force *mapycli* to not send a default parameter by explicitily setting it to `None`
+---
 #### GetCapabilities
 usage
 ``` python
-getCapRes = mapycli.wms.getcapabilities(url,[service="WMS",request="GetCapabilities",version="1.3.0",format="application/vnd.ogc.se_xml",**kargs])
+getCapRes = mapycli.wms.getcapabilities(url,service="WMS",request="GetCapabilities",version="1.3.0",format="application/vnd.ogc.se_xml",**kargs)
 ```
-every kargs given to getcapabilities will be url encoded and passed directly to the server. The function returns a getcapabilitiesResponse object. If the format is the default one mapycli will parse the responce otherwise you the only functionality provided by the getcapabilitiesResponse object will be the
+every kargs given to getcapabilities will be url encoded and passed directly to the server. The function returns a getcapabilitiesResponse object. If the format is the default one mapycli will parse the response otherwise you the only functionality provided by the getcapabilitiesResponse object will be the
 ``` python
-Res = getCapRes.Responce
+Res = getCapRes.response
 ```
-This will return you the **requests** responce
+This will return you the **requests** response
 
-If you want to go threw the hierarchy of the responce you can
+If you want to go threw the hierarchy of the response you can
 ``` python
 val = getCapRes.Capabilities.Service.Title
 ```
