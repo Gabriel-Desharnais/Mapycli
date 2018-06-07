@@ -1,5 +1,5 @@
 # Mapycli
-Python 3 package to do client operations on web service respecting Open Geospatial Consortium (OGC) standard. This is the documentation for version 0.0.0.1 (a.k.a really really alpha).
+Python 3 package to do client operations on web service respecting Open Geospatial Consortium (OGC) standard.
 
 ## How to install
 Sometime in the future the package will be on pypi and there will be a *.deb* or *.rpm* package, but for now you will need to do
@@ -7,11 +7,10 @@ Sometime in the future the package will be on pypi and there will be a *.deb* or
 python3 setup.py install
 ```
 ## Compatibilitie
-This package is develloped and tested on a linux machine with python 3.5 it should work on other platform, but there are no guaranties and no support for it. This is a python3 package since python2 end of life is supposed to be on January the first 2020, I will neighter devellope nor support for python2 (python2 needs to die and thus I don't believe in it anymore).
+This package is develloped and tested on a linux machine it should work on other platform, but there are no guaranties and no support for it. This is a python3 package since python2 end of life is supposed to be on January the first 2020, I will neighter devellope nor support for python2 (python2 needs to die and thus I don't believe in it anymore).
 
 ## Dependencies
 This is a list of package that **Mapycli** relies on.
-- Requests
 
 ## License
 This package is under MIT license, for more information look in **LICENSE** file.
@@ -25,7 +24,6 @@ import mapycli
 ```
 ### Session
 **Not available yet**
-
 Although the creation of a session is not mandatory to do requests, it is highly recommanded to use them because it add a lot of functionality and they can make your life easier. A session is an object that will keep in memory some parameters and most importantly the information about ressource available on the server. Session are service specific ('WMS','WFS','WCS','WPS','CWS')
 #### Creating a session
 To create a session you should do:
@@ -66,9 +64,23 @@ se.reset(url)
 
 This opperation will not touch other parameters set in session.
 
+#### Session variable
+
+If you want to change the default version tag used to communicate with the web service you can change the version variable e.g.
+``` python
+se.version = "1.3.0"
+```
+
+The default values are:
+|service|default version|
+|WMS|1.3.0|
+|WFS|2.02|
+|WCS|2.0|
+|WPS|2.0|
+
+
 ### WMS
 **not available yet**
-
 This section will list every WMS supported opperations available. Note that wms session object support all of these opperations e.g.
 The function call
 ``` python
