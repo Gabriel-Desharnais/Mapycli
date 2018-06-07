@@ -92,6 +92,9 @@ will translate to
 ``` python
 se.getcapabilities(*args)
 ```
+**Note:**
+
+It is important to note that since *mapycli* is using *requests* under the houd you can always add any parameters to your request (usefull for vendor support) and you force *mapycli* to not send a default parameter by explicitily setting it to `None`
 #### GetCapabilities
 usage
 ``` python
