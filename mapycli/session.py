@@ -28,10 +28,13 @@ def session(inheritance):
 
 				# Add the GetCapabilities to the dictionary of sources
 				self.sources[url] = getCap
-		def update():
+		def update(self):
 			# This method update information about layers with new
 			# GetCapabilities
+			pass
 
-		def reset():
+		def reset(self):
 			# This method erase old information about layers and reload it with
 			# a new GetCapabilities
+			pass
+	return Session
