@@ -72,6 +72,7 @@ se.version = "1.3.0"
 ```
 
 The default values are:
+
 |service|default version|
 |WMS|1.3.0|
 |WFS|2.02|
