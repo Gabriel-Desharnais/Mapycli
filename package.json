@@ -7,7 +7,7 @@
   "email" : "gabriel.desharnais@hotmail.com"
   },
   "dependencies": {
-    "mocha": "requests/requests#a3d7cf3f27e74c28ef30f01e9f2e483570ab042e"
+    "express": "requests/requests"
   },
   "repository": {
     "type": "git",
