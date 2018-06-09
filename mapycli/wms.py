@@ -28,12 +28,20 @@ def addlayers(layerDictList):
 		except KeyError:
 			# If there is no name, do nothing
 			pass
+		# O CRS
+		try:
+			layers[-1].crs = layerDict["CRS"]
+		except KeyError:
+			# If there is no crs, do nothing
+			pass
+		
 		# Add sub layers, if any, to the layers
 		try:
 			layers[-1].layers = addlayers(layerDict["Layer"])
 		except KeyError:
 			# If there is no layer, do nothing
 			pass
+
 
 	return layers
 	pass
@@ -150,6 +158,8 @@ class getCapabilitiesObject:
 			except KeyError:
 				# If there is no layer, do nothing
 				pass
+
+
 
 
 
