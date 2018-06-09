@@ -1,1 +1,28 @@
- 
+ {
+  "name": "mapycli",
+  "version": "0.0.0.2",
+  "description": "Python module for client queries to OGC standard web services",
+  "homepage": "https://github.com/Gabriel-Desharnais/Mapycli",
+  "bugs":{ "url" : "https://github.com/Gabriel-Desharnais/Mapycli/issues",
+  "email" : "gabriel.desharnais@hotmail.com"
+  },
+  "dependencies": {
+    "requests": "requests/requests/tree/v2.18.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Gabriel-Desharnais/Mapycli"
+  },
+  "keywords": [
+    "OWS",
+    "OGC",
+    "WMS",
+    "WPS",
+    "WFS",
+    "WGS",
+    "mapserver",
+    "geoserver"
+  ],
+  "author": "Gabriel Desharnais",
+  "license": "MIT"
+}
