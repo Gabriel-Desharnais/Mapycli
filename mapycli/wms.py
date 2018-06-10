@@ -34,7 +34,20 @@ def addlayers(layerDictList):
 		except KeyError:
 			# If there is no crs, do nothing
 			pass
-		
+
+		# O Abstract (0/1)
+		try:
+			layers[-1].abstract = layerDict["Abstract"][0]
+		except KeyError:
+			# If there is no abstract, do nothing
+			pass
+
+		# O KeywordList (0/1)
+		try:
+			layers[-1].keywordlist = layerDict["KeywordList"]["Keyword"]
+		except KeyError:
+			# If there is no keywords, do nothing
+			pass
 		# Add sub layers, if any, to the layers
 		try:
 			layers[-1].layers = addlayers(layerDict["Layer"])
