@@ -114,6 +114,7 @@ val = getCapRes.getCapStruct.service.title
 ```
 `val` will then have the value of the `<Title>` tag in `<service>` tag.
 Here is a list of all the supported tags and their place in the `getCapStruct` object.
+
 | Link | Tag | Type | Behavior note |
 | service.name | <Service><Name> | str | Expception if no tag, if multiple first one kept. |
 | service.title | <Service><Title> | str | Exception if no tag, if multiple first one kept. |
