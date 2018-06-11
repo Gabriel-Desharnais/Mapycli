@@ -83,6 +83,7 @@ The default values are:
 
 ### WMS
 **not available yet**
+
 This section will list every WMS supported opperations available. Note that wms session object support all of these opperations e.g.
 The function call
 ``` python
@@ -105,13 +106,28 @@ usage
 ``` python
 getCapRes = mapycli.wms.getcapabilities(url,service="WMS",request="GetCapabilities",version="1.3.0",format="application/vnd.ogc.se_xml",**kargs)
 ```
-every kargs given to getcapabilities will be url encoded and passed directly to the server. The function returns a getcapabilitiesResponse object. If the format is the default one mapycli will parse the response otherwise you the only functionality provided by the getcapabilitiesResponse object will be the
+every kargs given to getcapabilities will be url encoded and passed directly to the server. The function returns a `getCapabilitiesObject` object. If the format of the server response is the default one (application/xml) mapycli will parse the response, otherwise the only functionality provided by `getCapabilitiesObject` will be the
 ``` python
 Res = getCapRes.response
 ```
 This will return you the **requests** response
 
-If you want to go threw the hierarchy of the response you can
+If you want to go threw the basic parsing of the xml file you can use `getCapDict`. This variable is a dictionary that contains lists of every tags with their respective values. Therefore, the content of every tags with a given label at root level are assembled together in a list and placed in the dict with their label as key. If the tag contain other tags the content will be a dict of tags.
+
+e.g.
+``` python
+dic = getCapRes.getCapDict
+# Accessing all 'Service' tags
+serv = dic['Service']
+# Accessing the first Service tag
+s = serv[0]
+```
+
+
+If you want to go threw a well parsed hierarchy using OGC standard you can use `getCapStruct`.
+
+e.g.
+
 ``` python
 val = getCapRes.getCapStruct.service.title
 ```
@@ -133,9 +149,11 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |  service.accessConstrains  |  &lt;Service&gt;&lt;AcessConstrains&gt;   |     str     | If multiple, first one kept. If none, accessConstrains will not be created in service. |
 
 
-If you want to have the list of the layer name you can
+If you want to have the list of the layer name you can call the `getLayers` method.
+
+e.g.
 ``` python
-getCapRes.layers
+getCapRes.getLayers()
 ```
 #### GetMap
 #### GetFeatureInfo
