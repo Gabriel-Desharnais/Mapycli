@@ -110,8 +110,23 @@ This will return you the **requests** response
 
 If you want to go threw the hierarchy of the response you can
 ``` python
-val = getCapRes.Capabilities.Service.Title
+val = getCapRes.getCapStruct.service.title
 ```
+`val` will then have the value of the `<Title>` tag in `<service>` tag.
+Here is a list of all the supported tags and their place in the `getCapStruct` object.
+| Link | Tag | Type | Behavior note |
+| service.name | <Service><Name> | str | Expception if no tag, if multiple first one kept. |
+| service.title | <Service><Title> | str | Exception if no tag, if multiple first one kept. |
+| service.abstract | <Service><Abstract> | str | Exception if no tag, if multiple first one kept. |
+| service.onlineResource | <Service><OnlineResource> | str | Will not be implemented in a while. |
+| service.keywordList | <Service><KeywordList> | list of str | Exception if no tag, if multiple first one kept. |
+| service.contactInformation | <Service><ContactInformation> | struct | Exception if no tag, if multiple first one kept. Will not be implemented in a wild. |
+| service.layerLimit | <Service><LayerLimit> | int | If multiple, first one kept. If none, layerLimit will not be created in service. |
+| service.maxWidth | <Service><MaxWidth> | int | If multiple, first one kept. If none, maxWidth will not be created in service. |
+| service.maxHeight | <Service><MaxHeight> | int | If multiple, first one kept. If none, maxHeight will not be created in service. |
+| service.fees | <Service><Fees> | str | If multiple, first one kept. If none, fees will not be created in service. |
+| service.accessConstrains | <Service><AcessConstrains> | str | If multiple, first one kept. If none, accessConstrains will not be created in service. |
+
 
 If you want to have the list of the layer name you can
 ``` python
@@ -124,8 +139,8 @@ getCapRes.layers
 
 
 
-## Devellopement
-This package is develloped threw documentation driven devellopement (DDD). If you want to commit a change The documentation should be the first thing you touch. No **pull request** without a change in the doc will be merged.
+## Developement
+This package is developed threw documentation driven developement (DDD). If you want to commit a change, the documentation should be the first thing you touch. No **pull request** without a change in the doc will be merged.
 
 ## Bibliography
 Every document consulted to make this package will be listed here.
