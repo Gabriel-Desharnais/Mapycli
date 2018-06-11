@@ -44,7 +44,7 @@ def addlayers(layerDictList):
 
 		# O KeywordList (0/1)
 		try:
-			layers[-1].keywordlist = layerDict["KeywordList"]["Keyword"]
+			layers[-1].keywordlist = layerDict["KeywordList"][0]["Keyword"]
 		except KeyError:
 			# If there is no keywords, do nothing
 			pass
