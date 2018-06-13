@@ -153,7 +153,10 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...layer.title       | &lt;Capability&gt;&lt;Layer&gt;&lt;Title&gt; | str | Exception if no tag, if multiple first one kept. |
 |       ...layer.name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Name&gt; | str | If none, name will not be created, if multiple first one kept. |
 |       ...layer.abstract       | &lt;Capability&gt;&lt;Layer&gt;&lt;Abstract&gt; | str | If none, name will not be created, if multiple first one kept. |
-
+|       ...layer.keywordList       | &lt;Capability&gt;&lt;Layer&gt;&lt;KeywordList&gt; | list of str | If none, name will not be created, if multiple first one kept. |
+|       ...layer.style       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt; |  list of struct  | If none, name will not be created. |
+|       ...style.name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Name&gt; | str | Exception if no tag, if multiple first one kept. |
+|       ...style.legendUrl      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Name&gt; | struct | If multiple first one kept. |
 
 
 If you want to have the list of the layer name you can call the `getLayers` method.
