@@ -134,26 +134,33 @@ val = getCapRes.getCapStruct.service.title
 `val` will then have the value of the `<Title>` tag in `<service>` tag.
 Here is a list of all the supported tags and their place in the `getCapStruct` object.
 
-|             Link           |                   Tag                     |     Type    | Behavior note |
-| -------------------------- | ----------------------------------------- | ----------- | ------------- |
-|        service.name        |         &lt;Service&gt;&lt;Name&gt;       |     str     | Expception if no tag, if multiple first one kept. |
-|        service.title       |        &lt;Service&gt;&lt;Title&gt;       |     str     | Exception if no tag, if multiple first one kept. |
-|      service.abstract      |      &lt;Service&gt;&lt;Abstract&gt;      |     str     | Exception if no tag, if multiple first one kept. |
-|   service.onlineResource   |   &lt;Service&gt;&lt;OnlineResource&gt;   |     str     | Will not be implemented in a while. |
-|    service.keywordList     |    &lt;Service&gt;&lt;KeywordList&gt;     | list of str | Exception if no tag, if multiple first one kept. |
-| service.contactInformation | &lt;Service&gt;&lt;ContactInformation&gt; |    struct   | Exception if no tag, if multiple first one kept. Will not be implemented in a wild. |
-|     service.layerLimit     |     &lt;Service&gt;&lt;LayerLimit&gt;     |     int     | If multiple, first one kept. If none, layerLimit will not be created in service. |
-|      service.maxWidth      |      &lt;Service&gt;&lt;MaxWidth&gt;      |     int     | If multiple, first one kept. If none, maxWidth will not be created in service. |
-|      service.maxHeight     |      &lt;Service&gt;&lt;MaxHeight&gt;     |     int     | If multiple, first one kept. If none, maxHeight will not be created in service. |
-|        service.fees        |        &lt;Service&gt;&lt;Fees&gt;        |     str     | If multiple, first one kept. If none, fees will not be created in service. |
-|  service.accessConstrains  |  &lt;Service&gt;&lt;AcessConstrains&gt;   |     str     | If multiple, first one kept. If none, accessConstrains will not be created in service. |
+|             Link           |                   Tag                     |      Type      | Behavior note |
+| -------------------------- | ----------------------------------------- | -------------- | ------------- |
+|        service.name        |         &lt;Service&gt;&lt;Name&gt;       |       str      | Expception if no tag, if multiple first one kept. |
+|        service.title       |        &lt;Service&gt;&lt;Title&gt;       |       str      | Exception if no tag, if multiple first one kept. |
+|      service.abstract      |      &lt;Service&gt;&lt;Abstract&gt;      |       str      | Exception if no tag, if multiple first one kept. |
+|   service.onlineResource   |   &lt;Service&gt;&lt;OnlineResource&gt;   |       str      | Will not be implemented in a while. |
+|    service.keywordList     |    &lt;Service&gt;&lt;KeywordList&gt;     |  list of str   | Exception if no tag, if multiple first one kept. |
+| service.contactInformation | &lt;Service&gt;&lt;ContactInformation&gt; |     struct     | Exception if no tag, if multiple first one kept. Will not be implemented in a wild. |
+|     service.layerLimit     |     &lt;Service&gt;&lt;LayerLimit&gt;     |       int      | If multiple, first one kept. If none, layerLimit will not be created in service. |
+|      service.maxWidth      |      &lt;Service&gt;&lt;MaxWidth&gt;      |       int      | If multiple, first one kept. If none, maxWidth will not be created in service. |
+|      service.maxHeight     |      &lt;Service&gt;&lt;MaxHeight&gt;     |       int      | If multiple, first one kept. If none, maxHeight will not be created in service. |
+|        service.fees        |        &lt;Service&gt;&lt;Fees&gt;        |       str      | If multiple, first one kept. If none, fees will not be created in service. |
+|  service.accessConstrains  |  &lt;Service&gt;&lt;AcessConstrains&gt;   |       str      | If multiple, first one kept. If none, accessConstrains will not be created in service. |
+|    capability.exception    |    &lt;Capability&gt;&lt;Exception&gt;    |  list of str   | Exception if no tag, if multiple first one kept. |
+|      capability.layer      |       &lt;Capability&gt;&lt;Layer&gt;     | list of struct | Exception if no tag. |
+|       ...layer.layer       | &lt;Capability&gt;&lt;Layer&gt;&lt;Layer&gt; | list of struct | If none, layer will not be created in service. |
+|       ...layer.title       | &lt;Capability&gt;&lt;Layer&gt;&lt;Title&gt; | str | Exception if no tag, if multiple first one kept. |
+|       ...layer.name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Name&gt; | str | If none, name will not be created, if multiple first one kept. |
+|       ...layer.abstract       | &lt;Capability&gt;&lt;Layer&gt;&lt;Abstract&gt; | str | If none, name will not be created, if multiple first one kept. |
+
 
 
 If you want to have the list of the layer name you can call the `getLayers` method.
 
 e.g.
 ``` python
-getCapRes.getLayers()
+layers = getCapRes.getLayers()
 ```
 #### GetMap
 #### GetFeatureInfo
