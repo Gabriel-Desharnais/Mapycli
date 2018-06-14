@@ -157,6 +157,15 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...layer.style       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt; |  list of struct  | If none, name will not be created. |
 |       ...style.name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Name&gt; | str | Exception if no tag, if multiple first one kept. |
 |       ...style.legendUrl      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Name&gt; | struct | If multiple first one kept. |
+|       ...layer.crs       | &lt;Capability&gt;&lt;Layer&gt;&lt;CRS&gt; | list of str | If none, name will be created with an empty list. |
+|       ...layer.exGeographicBoundingBox       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt; | struct | If none, name will be created with an empty struct. If multiple, first one kept. |
+|       ...exGeographicBoundingBox.westBoundLongitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;westBoundLongitude&gt; | float | If none, exception thrown. If multiple, first one kept. |
+|       ...exGeographicBoundingBox.eastBoundLongitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;eastBoundLongitude&gt; | float | If none, exception thrown. If multiple, first one kept. |
+|       ...exGeographicBoundingBox.southBoundLatitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;southBoundLatitude&gt; | float | If none, exception thrown. If multiple, first one kept. |
+|       ...exGeographicBoundingBox.northBoundLatitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;northBoundLatitude&gt; | float | If none, exception thrown. If multiple, first one kept. |
+
+
+
 
 
 If you want to have the list of the layer name you can call the `getLayers` method.
