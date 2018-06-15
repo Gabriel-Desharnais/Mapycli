@@ -112,7 +112,9 @@ Res = getCapRes.response
 ```
 This will return you the **requests** response
 
-If you want to go threw the basic parsing of the xml file you can use `getCapDict`. This variable is a dictionary that contains lists of every tags with their respective values. Therefore, the content of every tags with a given label at root level are assembled together in a list and placed in the dict with their label as key. If the tag contain other tags the content will be a dict of tags.
+If you want to go threw the basic parsing of the xml file you can use `getCapDict`. This variable is a dictionary that contains lists of every tags with their respective values. Therefore, the content of every tags with a given label at root level are assembled together in a list and placed in the dict with their label as key.
+
+The value stored in the list paired with the key is a tuple of lenght 3. The first element is a dict of tags, if the tag has children, they will be stored in this element. The second element is a dict of the attributes, the key is the name of the attribute and the value is the value of the attribute. The third element of the tuple is the value stored in the tag.
 
 e.g.
 ``` python
@@ -149,14 +151,14 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |  service.accessConstrains  |  &lt;Service&gt;&lt;AcessConstrains&gt;   |       str      | If multiple, first one kept. If none, accessConstrains will not be created in service. |
 |    capability.exception    |    &lt;Capability&gt;&lt;Exception&gt;    |  list of str   | Exception if no tag, if multiple first one kept. |
 |      capability.layer      |       &lt;Capability&gt;&lt;Layer&gt;     | list of struct | Exception if no tag. |
-|       ...layer.layer       | &lt;Capability&gt;&lt;Layer&gt;&lt;Layer&gt; | list of struct | If none, layer will not be created in service. |
+|       ...layer[n].layer       | &lt;Capability&gt;&lt;Layer&gt;&lt;Layer&gt; | list of struct | If none, layer will not be created in service. |
 |       ...layer.title       | &lt;Capability&gt;&lt;Layer&gt;&lt;Title&gt; | str | Exception if no tag, if multiple first one kept. |
 |       ...layer.name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Name&gt; | str | If none, name will not be created, if multiple first one kept. |
 |       ...layer.abstract       | &lt;Capability&gt;&lt;Layer&gt;&lt;Abstract&gt; | str | If none, name will not be created, if multiple first one kept. |
 |       ...layer.keywordList       | &lt;Capability&gt;&lt;Layer&gt;&lt;KeywordList&gt; | list of str | If none, name will not be created, if multiple first one kept. |
 |       ...layer.style       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt; |  list of struct  | If none, name will not be created. |
-|       ...style.name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Name&gt; | str | Exception if no tag, if multiple first one kept. |
-|       ...style.legendUrl      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Name&gt; | struct | If multiple first one kept. |
+|       ...style[n].name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Name&gt; | str | Exception if no tag, if multiple first one kept. |
+|       ...style[n].legendUrl      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Name&gt; | struct | If multiple first one kept. |
 |       ...layer.crs       | &lt;Capability&gt;&lt;Layer&gt;&lt;CRS&gt; | list of str | If none, name will be created with an empty list. |
 |       ...layer.exGeographicBoundingBox       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt; | struct | If none, name will be created with an empty struct. If multiple, first one kept. |
 |       ...exGeographicBoundingBox.westBoundLongitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;westBoundLongitude&gt; | float | If none, exception thrown. If multiple, first one kept. |
@@ -171,6 +173,7 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...boundingBox[n].maxy       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | If none, exception thrown. Attribute maxy from &lt;BoundingBox&gt; |
 |       ...boundingBox[n].resx       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute resx from &lt;BoundingBox&gt; |
 |       ...boundingBox[n].resy       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute resy from &lt;BoundingBox&gt; |
+
 
 
 
