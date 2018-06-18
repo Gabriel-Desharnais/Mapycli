@@ -44,7 +44,7 @@ def addlayers(layerDictList):
 
 		# O KeywordList (0/1)
 		try:
-			layer[-1].keywordlist = [tup[2] for tup in layerDict["KeywordList"][0][0]["Keyword"]]
+			layer[-1].keywordList = [tup[2] for tup in layerDict["KeywordList"][0][0]["Keyword"]]
 		except KeyError:
 			# If there is no keywords, do nothing
 			pass
@@ -92,7 +92,6 @@ def addlayers(layerDictList):
 			layer[-1].layer = addlayers([tup[0] for tup in layerDict["Layer"]])
 		except KeyError as e:
 			# If there is no layer, do nothing
-			layer[-1].layer = e
 			pass
 
 
