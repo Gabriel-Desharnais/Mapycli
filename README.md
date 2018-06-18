@@ -138,12 +138,25 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 
 |             Link           |                   Tag                     |      Type      | Behavior note |
 | -------------------------- | ----------------------------------------- | -------------- | ------------- |
-|        service.name        |         &lt;Service&gt;&lt;Name&gt;       |       str      | Expception if no tag, if multiple first one kept. |
-|        service.title       |        &lt;Service&gt;&lt;Title&gt;       |       str      | Exception if no tag, if multiple first one kept. |
-|      service.abstract      |      &lt;Service&gt;&lt;Abstract&gt;      |       str      | Exception if no tag, if multiple first one kept. |
-|   service.onlineResource   |   &lt;Service&gt;&lt;OnlineResource&gt;   |       str      | Will not be implemented in a while. |
-|    service.keywordList     |    &lt;Service&gt;&lt;KeywordList&gt;     |  list of str   | Exception if no tag, if multiple first one kept. |
-| service.contactInformation | &lt;Service&gt;&lt;ContactInformation&gt; |     struct     | Exception if no tag, if multiple first one kept. Will not be implemented in a wild. |
+|        service.name        |         &lt;Service&gt;&lt;Name&gt;       |       str      | Expception if no tag. If multiple, first one kept. |
+|        service.title       |        &lt;Service&gt;&lt;Title&gt;       |       str      | Exception if no tag. If multiple, first one kept. |
+|      service.abstract      |      &lt;Service&gt;&lt;Abstract&gt;      |       str      | If none, name will not be created. If multiple first one kept. |
+|   service.onlineResource   |   &lt;Service&gt;&lt;OnlineResource&gt;   |       str      | Exception thrown if no tag. If multiple, first one kept. Attribute **xlink:href** in **OnlineResource** |
+|    service.keywordList     |    &lt;Service&gt;&lt;KeywordList&gt;     |  list of str   | If none, name will not be created. If multiple, first one kept. |
+| service.contactInformation | &lt;Service&gt;&lt;ContactInformation&gt; |     struct     | If none, name will not be created. If multiple, first one kept. |
+| ...contactInformation.contactPersonPrimary | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactPersonPrimary&gt; |     struct     | If none, name will not be created. If multiple, first one kept. |
+| ...contactPersonPrimary.contactPerson | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactPersonPrimary&gt;&lt;ContactPerson&gt; |       str      | If none, name will not be created. If multiple, first one kept. |
+| ...contactPersonPrimary.contactOrganization | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactPersonPrimary&gt;&lt;ContactOrganization&gt; |       str      | If none, name will not be created. If multiple, first one kept. |
+| ...contactInformation.contactPosition | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactPosition&gt; |     str     | If none, name will not be created. If multiple, first one kept. |
+| ...contactInformation.contactAddress | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactAddress&gt; |     struct     | If none, name will not be created. If multiple, first one kept. |
+| ...contactAddress.addressType | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactAddress&gt;&lt;AddressType&gt; |       str      | If none, name will not be created. If multiple, first one kept. |
+| ...contactAddress.address | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactAddress&gt;&lt;Address&gt; |       str      | If none, name will not be created. If multiple, first one kept. |
+| ...contactAddress.city | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactAddress&gt;&lt;City&gt; |       str      | If none, name will not be created. If multiple, first one kept. |
+| ...contactAddress.stateOrProvince | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactAddress&gt;&lt;StateOrProvince&gt; |       str      | If none, name will not be created. If multiple, first one kept. |
+| ...contactAddress.postCode | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactAddress&gt;&lt;PostCode&gt; |       str      | If none, name will not be created. If multiple, first one kept. |
+| ...contactAddress.country | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactAddress&gt;&lt;Country&gt; |       str      | If none, name will not be created. If multiple, first one kept. |
+| ...contactInformation.contactVoiceTelephone | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactVoiceTelephone&gt; |     str     | If none, name will not be created. If multiple, first one kept. |
+| ...contactInformation.contactElectronicMailAddress | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactElectronicMailAddress&gt; |     str     | If none, name will not be created. If multiple, first one kept. |
 |     service.layerLimit     |     &lt;Service&gt;&lt;LayerLimit&gt;     |       int      | If multiple, first one kept. If none, layerLimit will not be created in service. |
 |      service.maxWidth      |      &lt;Service&gt;&lt;MaxWidth&gt;      |       int      | If multiple, first one kept. If none, maxWidth will not be created in service. |
 |      service.maxHeight     |      &lt;Service&gt;&lt;MaxHeight&gt;     |       int      | If multiple, first one kept. If none, maxHeight will not be created in service. |
