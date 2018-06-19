@@ -141,7 +141,7 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |        service.name        |         &lt;Service&gt;&lt;Name&gt;       |       str      | Expception if no tag. If multiple, first one kept. |
 |        service.title       |        &lt;Service&gt;&lt;Title&gt;       |       str      | Exception if no tag. If multiple, first one kept. |
 |      service.abstract      |      &lt;Service&gt;&lt;Abstract&gt;      |       str      | If none, name will not be created. If multiple first one kept. |
-|   service.onlineResource   |   &lt;Service&gt;&lt;OnlineResource&gt;   |       str      | Exception thrown if no tag. If multiple, first one kept. Attribute **xlink:href** in **OnlineResource** |
+|   service.onlineRessource   |   &lt;Service&gt;&lt;OnlineRessource&gt;   |       str      | Exception thrown if no tag. If multiple, first one kept. Attribute **xlink:href** in **OnlineRessource** |
 |    service.keywordList     |    &lt;Service&gt;&lt;KeywordList&gt;     |  list of str   | If none, name will not be created. If multiple, first one kept. |
 | service.contactInformation | &lt;Service&gt;&lt;ContactInformation&gt; |     struct     | If none, name will not be created. If multiple, first one kept. |
 | ...contactInformation.contactPersonPrimary | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactPersonPrimary&gt; |     struct     | If none, name will not be created. If multiple, first one kept. |
@@ -161,7 +161,7 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |      service.maxWidth      |      &lt;Service&gt;&lt;MaxWidth&gt;      |       int      | If multiple, first one kept. If none, maxWidth will not be created in service. |
 |      service.maxHeight     |      &lt;Service&gt;&lt;MaxHeight&gt;     |       int      | If multiple, first one kept. If none, maxHeight will not be created in service. |
 |        service.fees        |        &lt;Service&gt;&lt;Fees&gt;        |       str      | If multiple, first one kept. If none, fees will not be created in service. |
-|  service.accessConstrains  |  &lt;Service&gt;&lt;AcessConstrains&gt;   |       str      | If multiple, first one kept. If none, accessConstrains will not be created in service. |
+|  service.accessConstraints  |  &lt;Service&gt;&lt;AccessConstraints&gt;   |       str      | If multiple, first one kept. If none, accessConstraints will not be created in service. |
 |    capability.exception    |    &lt;Capability&gt;&lt;Exception&gt;    |  list of str   | Exception if no tag, if multiple first one kept. |
 |      capability.layer      |       &lt;Capability&gt;&lt;Layer&gt;     | list of struct | Exception if no tag. |
 |       ...layer[n].layer       | &lt;Capability&gt;&lt;Layer&gt;&lt;Layer&gt; | list of struct | If none, layer will not be created in service. |
