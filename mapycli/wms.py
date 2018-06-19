@@ -122,8 +122,11 @@ def explore(root):
 			# Create an empty dict
 			child = {}
 
-		# Get Attributes
-		attributes = tag.attrib
+		# Get Attributes and remove namespace if needed
+		attributes = {}
+		for katt, vatt in tag.attrib.items():
+			attributes[katt.split("}")[-1]] = vatt
+
 
 		# Get text of tag
 		text = tag.text
@@ -205,15 +208,162 @@ class getCapabilitiesObject:
 			self.getCapStruct.service.name = self.getCapDict["Service"][0][0]["Name"][0][2]
 			# Get title (There can only be one)
 			self.getCapStruct.service.title = self.getCapDict["Service"][0][0]["Title"][0][2]
-			# Get abstract (There can only be one)
-			self.getCapStruct.service.abstract = self.getCapDict["Service"][0][0]["Abstract"][0][2]
-			# No OnlineResource
-			# Contact information should be added
-			# Optional info
+			# O Get abstract (There can only be one)
+			try:
+				self.getCapStruct.service.abstract = self.getCapDict["Service"][0][0]["Abstract"][0][2]
+			except KeyError:
+				# If there is no abstract, do nothing
+				pass
+
+			# OnlineResource
+			self.getCapStruct.service.onlineRessource = self.getCapDict["Service"][0][0]["OnlineResource"][0][1]["href"]
+
+			# O keywordList
+			try:
+				self.getCapStruct.service.keywordList = []
+				for keyword in self.getCapDict["Service"][0][0]["KeywordList"][0][0]["Keyword"]:
+					self.getCapStruct.service.keywordList.append(keyword[2])
+			except KeyError:
+				# If there is no keywords, do nothing.
+				pass
+
+			# O Contact information
+			try:
+				# Check if there is a ContactInformation tag
+				ci = self.getCapDict["Service"][0][0]["ContactInformation"][0][0]
+				# Create a struct
+				self.getCapStruct.service.contactInformation = struct()
+				# Add contactPersonPrimary
+				try:
+					cip = ci["ContactPersonPrimary"][0][0]
+					self.getCapStruct.service.contactInformation.contactPersonPrimary = struct()
+					# Add contactPerson
+					try:
+						self.getCapStruct.service.contactInformation.contactPersonPrimary.contactPerson = cip["ContactPerson"][0][2]
+					except KeyError:
+						# If there is no contactperson, do nothing.
+						pass
+					# Add contactOrganisation
+					try:
+						self.getCapStruct.service.contactInformation.contactPersonPrimary.contactOrganization = cip["ContactOrganization"][0][2]
+					except KeyError:
+						# If there is no contactperson, do nothing.
+						pass
+
+				except KeyError:
+					# If there is no contactPersonPrimary, do nothing.
+					pass
+
+				# Add contactPosition
+				try:
+					self.getCapStruct.service.contactInformation.contactPosition = ci["ContactPosition"][0][2]
+				except KeyError:
+					# If there is no ContactPosition, do nothing.
+					pass
+
+				# Add ContactAddress
+				try:
+					cia = ci["ContactAddress"][0][0]
+					self.getCapStruct.service.contactInformation.contactAddress = struct()
+
+					# Add addressType
+					try:
+						self.getCapStruct.service.contactInformation.contactAddress.addressType = cia["AddressType"][0][2]
+					except KeyError:
+						# If there is no AddressType, do nothing.
+						pass
+
+					# Add address
+					try:
+						self.getCapStruct.service.contactInformation.contactAddress.address = cia["Address"][0][2]
+					except KeyError:
+						# If there is no Address, do nothing.
+						pass
+
+					# Add city
+					try:
+						self.getCapStruct.service.contactInformation.contactAddress.city = cia["City"][0][2]
+					except KeyError:
+						# If there is no city, do nothing.
+						pass
+
+					# Add stateOrProvince
+					try:
+						self.getCapStruct.service.contactInformation.contactAddress.stateOrProvince = cia["StateOrProvince"][0][2]
+					except KeyError:
+						# If there is no city, do nothing.
+						pass
+
+					# Add postCode
+					try:
+						self.getCapStruct.service.contactInformation.contactAddress.postCode = cia["PostCode"][0][2]
+					except KeyError:
+						# If there is no city, do nothing.
+						pass
+
+					# Add country
+					try:
+						self.getCapStruct.service.contactInformation.contactAddress.country = cia["Country"][0][2]
+					except KeyError:
+						# If there is no country, do nothing
+						pass
+
+				except KeyError:
+					# If there is no ContactAddress, do nothing.
+					pass
+
+				# Add contactVoiceTelephone
+				try:
+					self.getCapStruct.service.contactInformation.contactVoiceTelephone = ci["ContactVoiceTelephone"][0][2]
+				except:
+					# If there is no contactVoiceTelephone, do nothing.
+					pass
+
+				# Add contactElectronicMailAddress
+				try:
+					self.getCapStruct.service.contactInformation.contactElectronicMailAddress = ci["ContactElectronicMailAddress"][0][2]
+				except:
+					# If there is no contactElectronicMailAddress, do nothing.
+					pass
+
+			except KeyError:
+				# if there is no contact information, do nothing.
+				pass
+
 			# O LayerLimit
+			try:
+				self.getCapStruct.service.layerLimit = int(self.getCapDict["Service"][0][0]["LayerLimit"][0][2])
+			except KeyError:
+				# If there is no LayerLimit, do nothing.
+				pass
+
 			# O MaxWidth
+			try:
+				self.getCapStruct.service.maxWidth = int(self.getCapDict["Service"][0][0]["MaxWidth"][0][2])
+			except KeyError:
+				# If there is no MaxWidth, do nothing.
+				pass
+
 			# O MaxHeight
+			try:
+				self.getCapStruct.service.maxHeight = int(self.getCapDict["Service"][0][0]["MaxHeight"][0][2])
+			except KeyError:
+				# If there is no MaxHeight, do nothing.
+				pass
+
 			# O Fees
+			try:
+				self.getCapStruct.service.fees = self.getCapDict["Service"][0][0]["Fees"][0][2]
+			except KeyError:
+				# If there is no Fees, do nothing.
+				pass
+
+			# O accessConstraints
+			try:
+				self.getCapStruct.service.accessConstraints = self.getCapDict["Service"][0][0]["AccessConstraints"][0][2]
+			except KeyError:
+				# If there is no AccessConstraints, do nothing.
+				pass
 
 			# Filling of the capability metadata
 			# Lack of documentation in ogc for request and expception
