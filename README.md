@@ -171,7 +171,11 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...layer.keywordList       | &lt;Capability&gt;&lt;Layer&gt;&lt;KeywordList&gt; | list of str | If none, name will not be created, if multiple first one kept. |
 |       ...layer.style       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt; |  list of struct  | If none, name will not be created. |
 |       ...style[n].name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Name&gt; | str | Exception if no tag, if multiple first one kept. |
-|       ...style[n].legendUrl      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Name&gt; | struct | If multiple first one kept. |
+|       ...style[n].title       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Title&gt; | str | Exception if no tag, if multiple first one kept. |
+|       ...style[n].abstract       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Abstract&gt; | str | Exception if no tag, if multiple first one kept. |
+|       ...style[n].legendUrl      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt; | struct | If multiple first one kept. |
+|       ...legendUrl.format      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt;&lt;Format&gt; | str | If multiple first one kept. |
+|       ...legendUrl.onlineRessource      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt;&lt;OnlineRessource&gt; | str | If multiple first one kept. use value in **xlink:href** attribute |
 |       ...layer.crs       | &lt;Capability&gt;&lt;Layer&gt;&lt;CRS&gt; | list of str | If none, name will be created with an empty list. |
 |       ...layer.exGeographicBoundingBox       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt; | struct | If none, name will be created with an empty struct. If multiple, first one kept. |
 |       ...exGeographicBoundingBox.westBoundLongitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;westBoundLongitude&gt; | float | If none, exception thrown. If multiple, first one kept. |
