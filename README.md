@@ -174,8 +174,13 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...style[n].title       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Title&gt; | str | Exception if no tag, if multiple first one kept. |
 |       ...style[n].abstract       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Abstract&gt; | str | Exception if no tag, if multiple first one kept. |
 |       ...style[n].legendUrl      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt; | struct | If multiple first one kept. |
+|       ...legendUrl.width      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt; | int | If multiple first one kept. attribute **width** |
+|       ...legendUrl.height      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt; | int | If multiple first one kept. attribute **height** |
 |       ...legendUrl.format      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt;&lt;Format&gt; | str | If multiple first one kept. |
 |       ...legendUrl.onlineRessource      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt;&lt;OnlineRessource&gt; | str | If multiple first one kept. use value in **xlink:href** attribute |
+|       ...style[n].styleSheetURL       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;StyleSheetURL&gt; | struct | If multiple, first one kept. |
+|       ...styleSheetURL.format       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;StyleSheetURL&gt;&lt;Format&gt; | str | If multiple, first one kept. |
+|       ...styleSheetURL.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;StyleSheetURL&gt;&lt;OnlineRessource&gt; | str | If multiple, first one kept. **Attribute xlink:href** |
 |       ...layer.crs       | &lt;Capability&gt;&lt;Layer&gt;&lt;CRS&gt; | list of str | If none, name will be created with an empty list. |
 |       ...layer.exGeographicBoundingBox       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt; | struct | If none, name will be created with an empty struct. If multiple, first one kept. |
 |       ...exGeographicBoundingBox.westBoundLongitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;westBoundLongitude&gt; | float | If none, exception thrown. If multiple, first one kept. |
