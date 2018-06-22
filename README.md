@@ -195,6 +195,8 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...boundingBox[n].maxy       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | If none, exception thrown. Attribute maxy from &lt;BoundingBox&gt; |
 |       ...boundingBox[n].resx       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute resx from &lt;BoundingBox&gt; |
 |       ...boundingBox[n].resy       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute resy from &lt;BoundingBox&gt; |
+|       ...layer[n].attribution       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt; | struct | If multiple, first one used. |
+|       ...attribution.title       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;Title&gt; | str | If multiple, first one used. |
 
 
 
