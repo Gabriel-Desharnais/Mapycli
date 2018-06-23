@@ -197,6 +197,7 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...boundingBox[n].resy       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute resy from &lt;BoundingBox&gt; |
 |       ...layer[n].attribution       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt; | struct | If multiple, first one used. |
 |       ...attribution.title       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;Title&gt; | str | If multiple, first one used. |
+|       ...attribution.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;OOnlineRessource&gt; | str | If multiple, first one used. using attribute **xlink:href** |
 
 
 
