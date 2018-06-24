@@ -164,6 +164,12 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |  service.accessConstraints  |  &lt;Service&gt;&lt;AccessConstraints&gt;   |       str      | If multiple, first one kept. If none, accessConstraints will not be created in service. |
 |    capability.exception    |    &lt;Capability&gt;&lt;Exception&gt;    |  list of str   | Exception if no tag, if multiple first one kept. |
 |      capability.layer      |       &lt;Capability&gt;&lt;Layer&gt;     | list of struct | Exception if no tag. |
+|       ...layer[n].queryable       | &lt;Capability&gt;&lt;Layer&gt; | bool | If none, queryable will be set to default (False). Using attribute **queryable**. |
+|       ...layer[n].cascaded       | &lt;Capability&gt;&lt;Layer&gt; | int | If none, cascaded will be set to default (0). Using attribute **cascaded**. |
+|       ...layer[n].opaque       | &lt;Capability&gt;&lt;Layer&gt; | bool | If none, opaque will be set to default (false). Using attribute **cascaded**. |
+|       ...layer[n].noSubsets       | &lt;Capability&gt;&lt;Layer&gt; | bool | If none, noSubsets will be set to default (false). Using attribute **noSubsets**. |
+|       ...layer[n].fixedWidth       | &lt;Capability&gt;&lt;Layer&gt; | int | If none, fixedWidth will be set to default (0). Using attribute **fixedWidth**. |
+|       ...layer[n].fixedHeight       | &lt;Capability&gt;&lt;Layer&gt; | int | If none, fixedHeight will be set to default (0). Using attribute **fixedHeight**. |
 |       ...layer[n].layer       | &lt;Capability&gt;&lt;Layer&gt;&lt;Layer&gt; | list of struct | If none, layer will not be created in service. |
 |       ...layer.title       | &lt;Capability&gt;&lt;Layer&gt;&lt;Title&gt; | str | Exception if no tag, if multiple first one kept. |
 |       ...layer.name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Name&gt; | str | If none, name will not be created, if multiple first one kept. |
