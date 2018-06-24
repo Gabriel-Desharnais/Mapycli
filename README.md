@@ -227,6 +227,7 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...featureListURL.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;FeatureListURL&gt;&lt;OnlineRessource&gt; | str | If multple, first one used. Using attribute **xlink:href**. |
 |       ...layer[n].minScaleDenominator       | &lt;Capability&gt;&lt;Layer&gt;&lt;MinScaleDenominator&gt; | float | If multple, first one used. |
 |       ...layer[n].maxScaleDenominator       | &lt;Capability&gt;&lt;Layer&gt;&lt;MaxScaleDenominator&gt; | float | If multple, first one used. |
+|       ...layer[n].dimension       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | struct list |  |
 
 
 
