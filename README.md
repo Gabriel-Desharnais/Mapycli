@@ -203,7 +203,12 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...boundingBox[n].resy       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute resy from &lt;BoundingBox&gt; |
 |       ...layer[n].attribution       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt; | struct | If multiple, first one used. |
 |       ...attribution.title       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;Title&gt; | str | If multiple, first one used. |
-|       ...attribution.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;OOnlineRessource&gt; | str | If multiple, first one used. using attribute **xlink:href** |
+|       ...attribution.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;OnlineRessource&gt; | str | If multiple, first one used. using attribute **xlink:href**. |
+|       ...attribution.logoURL       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt; | struct | If multiple, first one used. |
+|       ...logoURL.width       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt; | int | If multiple, first one used. Using attribute **width**. |
+|       ...logoURL.height       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt; | int | If multiple, first one used. Using attribute **height**. |
+|       ...logoURL.format       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt;&lt;Format&gt; | str | If multiple, first one used. |
+|       ...logoURL.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt;&lt;OnlineRessource&gt; | str | If multiple, first one used. using attribute **xlink:href**. |
 
 
 
