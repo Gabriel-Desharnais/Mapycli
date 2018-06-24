@@ -209,10 +209,24 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...logoURL.height       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt; | int | If multiple, first one used. Using attribute **height**. |
 |       ...logoURL.format       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt;&lt;Format&gt; | str | If multiple, first one used. |
 |       ...logoURL.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt;&lt;OnlineRessource&gt; | str | If multiple, first one used. using attribute **xlink:href**. |
-
-
-
-
+|       ...layer[n].authorityURL       | &lt;Capability&gt;&lt;Layer&gt;&lt;AuthorityURL&gt; | struct list |  |
+|       ...authorityURL[n].name       | &lt;Capability&gt;&lt;Layer&gt;&lt;AuthorityURL&gt; | str | If multiple, first one used. Using attribute **name**. |
+|       ...authorityURL[n].onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;AuthorityURL&gt;&lt;OnlineRessource&gt; | str | If multiple, first one used. |
+|       ...layer[n].identifier       | &lt;Capability&gt;&lt;Layer&gt;&lt;Identifier&gt; | struct list |  |
+|       ...identifier[n].id       | &lt;Capability&gt;&lt;Layer&gt;&lt;Identifier&gt; | str | Actual value enclosed in **Identifier** tag  |
+|       ...identifier[n].authority       | &lt;Capability&gt;&lt;Layer&gt;&lt;Identifier&gt; | str | If multiple, first one used. Using attribute **authority**.  |
+|       ...layer[n].metadataURL       | &lt;Capability&gt;&lt;Layer&gt;&lt;MetadataURL&gt; | struct list |  |
+|       ...metadataURL.type       | &lt;Capability&gt;&lt;Layer&gt;&lt;MetadataURL&gt; | str | If multple, first one used. Using attribute **type** |
+|       ...metadataURL.format       | &lt;Capability&gt;&lt;Layer&gt;&lt;MetadataURL&gt;&lt;Format&gt; | str | If multple, first one used. |
+|       ...metadataURL.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;MetadataURL&gt;&lt;OnlineRessource&gt; | str | If multple, first one used. Using attribute **xlink:href**. |
+|       ...layer[n].dataURL       | &lt;Capability&gt;&lt;Layer&gt;&lt;DataURL&gt; | struct | If multple, first one used. |
+|       ...dataURL.format       | &lt;Capability&gt;&lt;Layer&gt;&lt;DataURL&gt;&lt;Format&gt; | str | If multple, first one used. |
+|       ...dataURL.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;DataURL&gt;&lt;OnlineRessource&gt; | str | If multple, first one used. Using attribute **xlink:href**. |
+|       ...layer[n].featureListURL       | &lt;Capability&gt;&lt;Layer&gt;&lt;FeatureListURL&gt; | struct | If multple, first one used. |
+|       ...featureListURL.format       | &lt;Capability&gt;&lt;Layer&gt;&lt;FeatureListURL&gt;&lt;Format&gt; | str | If multple, first one used. |
+|       ...featureListURL.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;FeatureListURL&gt;&lt;OnlineRessource&gt; | str | If multple, first one used. Using attribute **xlink:href**. |
+|       ...layer[n].minScaleDenominator       | &lt;Capability&gt;&lt;Layer&gt;&lt;MinScaleDenominator&gt; | float | If multple, first one used. |
+|       ...layer[n].maxScaleDenominator       | &lt;Capability&gt;&lt;Layer&gt;&lt;MaxScaleDenominator&gt; | float | If multple, first one used. |
 
 
 
