@@ -237,6 +237,29 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...dimension[n].current       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | str | If multiple, first one used. Using **current** attribute. |
 |       ...dimension[n].extent       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | str | If multiple, first one used. Using value of **Dimension** tag. |
 
+Inheritance of layers properties is manage with the folowing:
+
+| Element | Inheritance |
+| ------- | ----------- |
+| Layer   | No          |
+| Name    | No          |
+| Title   | No          |
+| Abstract | No         |
+| KeywordList | No      |
+| Style   | Add         |
+| CRS     | Add         |
+| EX_GeographicBoundingBox| Replace |
+| BoundingBox | Replace |
+| Dimension | Replace   |
+| Attribution | Replace |
+| AuthorityURL | Add    |
+| Identifier | No       |
+| MetadataURL | No      |
+| DataURL | No          |
+| FeatureListURL | No   |
+| MinScaleDenominator | Replace |
+| MaxScaleDenominator | Replace |
+| Layer attributes | Replace |
 
 
 If you want to have the list of the layer name you can call the `getLayers` method.
