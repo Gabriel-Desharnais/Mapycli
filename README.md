@@ -228,6 +228,14 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...layer[n].minScaleDenominator       | &lt;Capability&gt;&lt;Layer&gt;&lt;MinScaleDenominator&gt; | float | If multple, first one used. |
 |       ...layer[n].maxScaleDenominator       | &lt;Capability&gt;&lt;Layer&gt;&lt;MaxScaleDenominator&gt; | float | If multple, first one used. |
 |       ...layer[n].dimension       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | struct list |  |
+|       ...dimension[n].name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | str | If multiple, first one used. Using **name** attribute. |
+|       ...dimension[n].units       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | str | If multiple, first one used. Using **units** attribute. |
+|       ...dimension[n].unitSymbol       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | str | If multiple, first one used. Using **unitSymbol** attribute. |
+|       ...dimension[n].default       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | str | If multiple, first one used. Using **default** attribute. |
+|       ...dimension[n].multipleValues       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | str | If multiple, first one used. Using **multipleValues** attribute. |
+|       ...dimension[n].nearestValue       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | str | If multiple, first one used. Using **nearestValue** attribute. |
+|       ...dimension[n].current       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | str | If multiple, first one used. Using **current** attribute. |
+|       ...dimension[n].extent       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | str | If multiple, first one used. Using value of **Dimension** tag. |
 
 
 
