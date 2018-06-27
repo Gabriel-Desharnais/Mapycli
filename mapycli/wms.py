@@ -85,7 +85,20 @@ def addlayers(layerDictList):
 					pass
 		except KeyError:
 			pass
+		# Add attribution if exist
+		try:
+			att = layerDict["Attribution"][0][0]
+			layer[-1].attribution = struct()
 
+			# Add title
+			try:
+				layer[-1].attribution.title = att["Title"][0][2]
+			except KeyError:
+				pass
+
+			#
+		except KeyError:
+			pass
 
 		# Add sub layers, if any, to the layers
 		try:
