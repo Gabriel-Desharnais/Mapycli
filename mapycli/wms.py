@@ -85,6 +85,7 @@ def addlayers(layerDictList):
 					pass
 		except KeyError:
 			pass
+
 		# Add attribution if exist
 		try:
 			att = layerDict["Attribution"][0][0]
@@ -96,7 +97,163 @@ def addlayers(layerDictList):
 			except KeyError:
 				pass
 
-			#
+			# Add online onlineResource
+			try:
+				layer[-1].attribution.onlineResource = att["OnlineResource"][0][1]["href"]
+			except KeyError:
+				pass
+
+			# Add LogoURL
+			try:
+				logo = att["LogoURL"][0]
+				layer[-1].attribution.logoURL = struct()
+
+				# Add width
+				try:
+					layer[-1].attribution.logoURL.width = int(logo[1]["width"])
+				except KeyError:
+					pass
+
+				# Add Height
+				try:
+					layer[-1].attribution.logoURL.height = int(logo[1]["height"])
+				except KeyError:
+					pass
+
+				# Add format
+				try:
+					layer[-1].attribution.logoURL.format = logo[0]["Format"][0][2]
+				except KeyError:
+					pass
+
+				# Add onlineResource for logo
+				try:
+					layer[-1].attribution.logoURL.onlineResource = logo[0]["OnlineResource"][0][1]["href"]
+				except KeyError:
+					pass
+
+			except KeyError:
+				pass
+		except KeyError:
+			pass
+
+		# Add authorityURL
+		try:
+			layer[-1].authorityURL = []
+			for aut in layerDict["AuthorityURL"]:
+				# Add struct to authorityURL list
+				layer[-1].authorityURL.append(struct())
+
+				# Add name
+				try:
+					layer[-1].authorityURL[-1].name = aut[1]["name"]
+				except KeyError:
+					pass
+
+				# Add onlineResource of authorityURL
+				try:
+					layer[-1].authorityURL[-1].onlineResource = aut[0]["OnlineResource"][0][1]["href"]
+				except KeyError:
+					pass
+
+
+		except KeyError:
+			pass
+
+		# Add identifier
+		try:
+			layer[-1].identifier = []
+			for ide in layerDict["Identifier"]:
+				# Add struct to identifier list
+				layer[-1].identifier.append(struct())
+
+				# Add id
+				layer[-1].identifier[-1].id = ide[2]
+
+				# Add authority
+				try:
+					layer[-1].identifier[-1].authority = ide[1]["authority"]
+				except KeyError:
+					pass
+		except KeyError:
+			pass
+
+		# Add metadataURL
+		try:
+			layer[-1].metadataURL = []
+			for meta in layerDict["MetadataURL"]:
+				# Add strcut to metadataURL list
+				layer[-1].metadataURL.append(struct())
+
+				# Add type
+				try:
+					layer[-1].metadataURL[-1].type = meta[1]["type"]
+				except KeyError:
+					pass
+
+				# Add format
+				try:
+					layer[-1].metadataURL[-1].format = meta[0]["Format"][0][2]
+				except KeyError:
+					pass
+
+				# Add onlineResource of metadata
+				try:
+					layer[-1].metadataURL[-1].onlineResource = meta[0]["OnlineResource"][0][1]["href"]
+				except KeyError:
+					pass
+		except KeyError:
+			pass
+
+		# Add dataURL
+		try:
+			dat = layerDict["DataURL"][0]
+			layer[-1].dataURL = struct()
+
+			# Add format
+			try:
+				layer[-1].dataURL.format = dat[0]["Format"][0][2]
+			except KeyError:
+				pass
+
+			# Add onlineResource
+			try:
+				layer[-1].dataURL.onlineResource = dat[0]["OnlineResource"][0][1]["href"]
+			except KeyError:
+				pass
+
+		except KeyError:
+			pass
+
+		# Add featureListURL
+		try:
+			fea = layerDict["FeatureListURL"][0]
+			layer[-1].featureListURL = struct()
+
+			# Add format
+			try:
+				layer[-1].featureListURL.format = fea[0]["Formaat"][0][2]
+			except KeyError:
+				pass
+
+			# Add onlineResource
+			try:
+				layer[-1].featureListURL.onlineResource = fea[0]["OnlineResource"][0][1]["href"]
+			except KeyError:
+				pass
+
+			# Add minScaleDenominator
+			try:
+				layer[-1].minScaleDenominator = layerDict["MinScaleDenominator"][0][2]
+			except KeyError:
+				pass
+
+			# Add maxScaleDenominator
+			try:
+				layer[-1].maxScaleDenominator = layerDict["MaxScaleDenominator"][0][2]
+			except KeyError:
+				pass
+
 		except KeyError:
 			pass
 
@@ -229,7 +386,7 @@ class getCapabilitiesObject:
 				pass
 
 			# OnlineResource
-			self.getCapStruct.service.onlineRessource = self.getCapDict["Service"][0][0]["OnlineResource"][0][1]["href"]
+			self.getCapStruct.service.onlineResource = self.getCapDict["Service"][0][0]["OnlineResource"][0][1]["href"]
 
 			# O keywordList
 			try:
