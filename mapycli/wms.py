@@ -19,43 +19,162 @@ def addlayers(layerDictList):
 	layer = []
 	for layerDict in layerDictList:
 		layer.append(struct())
+		# Add queryable attribute
+		try:
+			layer[-1].queryable = int(layerDict[1]["queryable"]) == 1
+		except KeyError:
+			layer[-1].queryable = None
+
+		# Add cascaded attribute
+		try:
+			layer[-1].cascaded = int(layerDict[1]["cascaded"])
+		except KeyError:
+			layer[-1].cascaded = None
+
+		# Add opaque attribute
+		try:
+			layer[-1].opaque = int(layerDict[1]["opaque"])
+		except KeyError:
+			layer[-1].opaque = None
+
+		# Add noSubsets
+		try:
+			layer[-1].noSubsets = int(layerDict[1]["noSubsets"]) > 0
+		except KeyError:
+			layer[-1].noSubsets = None
+
+		# Add fixedWidth
+		try:
+			layer[-1].fixedWidth = int(layerDict[1]["fixedWidth"])
+		except KeyError:
+			layer[-1].fixedWidth = None
+
+		# Add fixedHeight
+		try:
+			layer[-1].fixedHeight = int(layerDict[1]["fixedHeight"])
+		except KeyError:
+			layer[-1].fixedHeight = None
+
+
+
 		# Get title (There can only be one)
-		layer[-1].title = layerDict["Title"][0][2]
+		layer[-1].title = layerDict[0]["Title"][0][2]
+
 		# Add name Optional
 		try:
 			# Get name (There can only be one)
-			layer[-1].name = layerDict["Name"][0][2]
+			layer[-1].name = layerDict[0]["Name"][0][2]
 		except KeyError:
 			# If there is no name, do nothing
 			pass
 		# O CRS
 		try:
-			layer[-1].crs = [tup[2] for tup in layerDict["CRS"]]
+			layer[-1].crs = [tup[2] for tup in layerDict[0]["CRS"]]
 		except KeyError:
 			# If there is no crs, do nothing
 			pass
 
 		# O Abstract (0/1)
 		try:
-			layer[-1].abstract = layerDict["Abstract"][0][2]
+			layer[-1].abstract = layerDict[0]["Abstract"][0][2]
 		except KeyError:
 			# If there is no abstract, do nothing
 			pass
 
 		# O KeywordList (0/1)
 		try:
-			layer[-1].keywordList = [tup[2] for tup in layerDict["KeywordList"][0][0]["Keyword"]]
+			layer[-1].keywordList = [tup[2] for tup in layerDict[0]["KeywordList"][0][0]["Keyword"]]
 		except KeyError:
 			# If there is no keywords, do nothing
+			pass
+
+		# Style
+		try:
+			layer[-1].style = []
+			for sty in layerDict[0]["Style"]:
+				layer[-1].style.append(struct())
+
+				# Add name
+				try:
+					layer[-1].style[-1].name = sty[0]["Name"][0][2]
+				except KeyError:
+					pass
+
+				# Add title
+				try:
+					layer[-1].style[-1].title = sty[0]["Title"][0][2]
+				except KeyError:
+					pass
+
+				# Add abstract
+				try:
+					layer[-1].style[-1].abstract = sty[0]["Abstract"][0][2]
+				except KeyError:
+					pass
+
+				# Add legendURL
+				try:
+					leg = sty[0]["LegendURL"][0]
+					layer[-1].style[-1].legendURL = struct()
+
+					# Add width
+					try:
+						layer[-1].style[-1].legendURL.width = int(leg[1]["width"])
+					except KeyError:
+						pass
+
+					# Add height
+					try:
+						layer[-1].style[-1].legendURL.height = int(leg[1]["height"])
+					except KeyError:
+						pass
+
+					# Add format
+					try:
+						layer[-1].style[-1].legendURL.format = leg[0]["Format"][0][2]
+					except KeyError:
+						pass
+
+					# Add onlineResource
+					try:
+						layer[-1].style[-1].legendURL.onlineResource = leg[0]["OnlineResource"][0][1]["href"]
+					except KeyError:
+						pass
+
+				except KeyError:
+					pass
+
+				# Add styleSheetURL
+
+				try:
+					she = sty[0]["StyleSheetURL"][0]
+					layer[-1].style[-1].styleSheetURL = struct()
+
+					# Add format
+					try:
+						layer[-1].style[-1].styleSheetURL.format = she[0]["Format"][0][2]
+					except KeyError:
+						pass
+
+					# Add onlineResource
+					try:
+						layer[-1].style[-1].styleSheetURL.onlineResource = she[0]["OnlineResource"][0][1]["href"]
+					except KeyError:
+						pass
+
+				except KeyError:
+					pass
+
+		except KeyError:
 			pass
 
 		# exGeographicBoundingBox
 		layer[-1].exGeographicBoundingBox = struct()
 		try:
-			layer[-1].exGeographicBoundingBox.westBoundLongitude = float(  layerDict["EX_GeographicBoundingBox"][0][0]["westBoundLongitude"][0][2] )
-			layer[-1].exGeographicBoundingBox.eastBoundLongitude = float( layerDict["EX_GeographicBoundingBox"][0][0]["eastBoundLongitude"][0][2] )
-			layer[-1].exGeographicBoundingBox.southBoundLongitude = float( layerDict["EX_GeographicBoundingBox"][0][0]["southBoundLongitude"][0][2] )
-			layer[-1].exGeographicBoundingBox.northBoundLongitude = float( layerDict["EX_GeographicBoundingBox"][0][0]["northBoundLongitude"][0][2] )
+			layer[-1].exGeographicBoundingBox.westBoundLongitude = float(  layerDict[0]["EX_GeographicBoundingBox"][0][0]["westBoundLongitude"][0][2] )
+			layer[-1].exGeographicBoundingBox.eastBoundLongitude = float( layerDict[0]["EX_GeographicBoundingBox"][0][0]["eastBoundLongitude"][0][2] )
+			layer[-1].exGeographicBoundingBox.southBoundLatitude = float( layerDict[0]["EX_GeographicBoundingBox"][0][0]["southBoundLatitude"][0][2] )
+			layer[-1].exGeographicBoundingBox.northBoundLatitude = float( layerDict[0]["EX_GeographicBoundingBox"][0][0]["northBoundLatitude"][0][2] )
 		except:
 			pass
 
@@ -63,7 +182,7 @@ def addlayers(layerDictList):
 		# Create the list of struct
 		layer[-1].boundingBox = []
 		try:
-			for bbox in layerDict["BoundingBox"]:
+			for bbox in layerDict[0]["BoundingBox"]:
 				# Create the structure
 				layer[-1].boundingBox.append(struct())
 
@@ -88,7 +207,7 @@ def addlayers(layerDictList):
 
 		# Add attribution if exist
 		try:
-			att = layerDict["Attribution"][0][0]
+			att = layerDict[0]["Attribution"][0][0]
 			layer[-1].attribution = struct()
 
 			# Add title
@@ -140,7 +259,7 @@ def addlayers(layerDictList):
 		# Add authorityURL
 		try:
 			layer[-1].authorityURL = []
-			for aut in layerDict["AuthorityURL"]:
+			for aut in layerDict[0]["AuthorityURL"]:
 				# Add struct to authorityURL list
 				layer[-1].authorityURL.append(struct())
 
@@ -163,7 +282,7 @@ def addlayers(layerDictList):
 		# Add identifier
 		try:
 			layer[-1].identifier = []
-			for ide in layerDict["Identifier"]:
+			for ide in layerDict[0]["Identifier"]:
 				# Add struct to identifier list
 				layer[-1].identifier.append(struct())
 
@@ -181,7 +300,7 @@ def addlayers(layerDictList):
 		# Add metadataURL
 		try:
 			layer[-1].metadataURL = []
-			for meta in layerDict["MetadataURL"]:
+			for meta in layerDict[0]["MetadataURL"]:
 				# Add strcut to metadataURL list
 				layer[-1].metadataURL.append(struct())
 
@@ -207,7 +326,7 @@ def addlayers(layerDictList):
 
 		# Add dataURL
 		try:
-			dat = layerDict["DataURL"][0]
+			dat = layerDict[0]["DataURL"][0]
 			layer[-1].dataURL = struct()
 
 			# Add format
@@ -227,7 +346,7 @@ def addlayers(layerDictList):
 
 		# Add featureListURL
 		try:
-			fea = layerDict["FeatureListURL"][0]
+			fea = layerDict[0]["FeatureListURL"][0]
 			layer[-1].featureListURL = struct()
 
 			# Add format
@@ -242,24 +361,81 @@ def addlayers(layerDictList):
 			except KeyError:
 				pass
 
-			# Add minScaleDenominator
-			try:
-				layer[-1].minScaleDenominator = layerDict["MinScaleDenominator"][0][2]
-			except KeyError:
-				pass
+		except KeyError:
+			pass
 
-			# Add maxScaleDenominator
-			try:
-				layer[-1].maxScaleDenominator = layerDict["MaxScaleDenominator"][0][2]
-			except KeyError:
-				pass
+		# Add minScaleDenominator
+		try:
+			layer[-1].minScaleDenominator = float( layerDict[0]["MinScaleDenominator"][0][2] )
+		except KeyError:
+			pass
+
+		# Add maxScaleDenominator
+		try:
+			layer[-1].maxScaleDenominator = float( layerDict[0]["MaxScaleDenominator"][0][2] )
+		except KeyError:
+			pass
+
+		# Dimension
+		try:
+			layer[-1].dimension = []
+			for dim in layerDict[0]["Dimension"]:
+				layer[-1].dimension.append(struct())
+
+				# Add name
+				try:
+					layer[-1].dimension[-1].name = dim[1]["name"]
+				except KeyError:
+					pass
+
+				# Add units
+				try:
+					layer[-1].dimension[-1].units = dim[1]["units"]
+				except KeyError:
+					pass
+
+				# Add unitSymbol
+				try:
+					layer[-1].dimension[-1].unitSymbol = dim[1]["unitSymbol"]
+				except KeyError:
+					pass
+
+				# Add default
+				try:
+					layer[-1].dimension[-1].default = dim[1]["default"]
+				except KeyError:
+					pass
+
+				# Add multipleValues
+				try:
+					layer[-1].dimension[-1].multipleValues = dim[1]["multipleValues"]
+				except KeyError:
+					pass
+
+				# Add nearestValue
+				try:
+					layer[-1].dimension[-1].nearestValue = dim[1]["nearestValue"]
+				except KeyError:
+					pass
+
+				# Add current
+				try:
+					layer[-1].dimension[-1].current = dim[1]["current"]
+				except KeyError:
+					pass
+
+				# Add extent
+				try:
+					layer[-1].dimension[-1].extent = dim[2]
+				except KeyError:
+					pass
 
 		except KeyError:
 			pass
 
 		# Add sub layers, if any, to the layers
 		try:
-			layer[-1].layer = addlayers([tup[0] for tup in layerDict["Layer"]])
+			layer[-1].layer = addlayers(layerDict[0]["Layer"])
 		except KeyError as e:
 			# If there is no layer, do nothing
 			pass
@@ -540,7 +716,7 @@ class getCapabilitiesObject:
 
 			# O Fill layers arg with a list of layers
 			try:
-				self.getCapStruct.capability.layer = addlayers([tup[0] for tup in self.getCapDict["Capability"][0][0]["Layer"]])
+				self.getCapStruct.capability.layer = addlayers( self.getCapDict["Capability"][0][0]["Layer"])
 			except KeyError:
 				# If there is no layer, do nothing
 				pass
