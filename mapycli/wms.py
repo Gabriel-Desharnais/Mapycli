@@ -13,6 +13,54 @@ class struct(object):
 	# This class will be used to contain variable
 	pass
 
+def inheritWMS130(layerList):
+	# This function will do the inheritance on the layer attributes
+	for layer in layerList:
+		# Add inheritance on child
+
+		# Add parent style to child
+		ls = layer.style
+		for lay in layer.layer:
+			lay.style += ls
+
+		# Add parent CRS to child
+		crs = layer.crs
+		for lay in layer.layer:
+			lay.crs += crs
+
+		# try default to parent ex_GeographicBoundingBox
+		for lay in layer.layer:
+			# check if ex_GeographicBoundingBox exists in child
+			try:
+				lay.exGeographicBoundingBox
+			except AttributeError:
+				try:
+					lay.exGeographicBoundingBox = layer.exGeographicBoundingBox
+				except AttributeError:
+					pass
+
+		# try default to parent boundingBox
+		for bbox in layer.boundingBox:
+			# Go threw every bbox of the parent layer
+			for lay in layer.layer:
+				# To every child, do the folowing:
+				try:
+					# If a child has a bbox with the same crs don't add the parent bbox to its available bbox.
+					crs = bbox.crs
+					if crs not in [subbou.crs for subbou in lay.boundingBox ]:
+						# Add the parent boundingBox to the child
+						lay.boundingBox.append(bbox)
+				except AttributeError:
+					pass
+
+		# Replace Dimension
+		
+		# Try apply function on children
+		try:
+			inheritWMS130(layer.layer)
+		except AttributeError:
+			pass
+
 def addlayers(layerDictList):
 	# This fuction returns a list of layers and sublayers and fill the
 	# information in a struct class
@@ -69,7 +117,9 @@ def addlayers(layerDictList):
 			pass
 		# O CRS
 		try:
-			layer[-1].crs = [tup[2] for tup in layerDict[0]["CRS"]]
+			layer[-1].crs = []
+			for tup in layerDict[0]["CRS"]:
+				layer[-1].crs.append(tup[2])
 		except KeyError:
 			# If there is no crs, do nothing
 			pass
@@ -169,12 +219,15 @@ def addlayers(layerDictList):
 			pass
 
 		# exGeographicBoundingBox
-		layer[-1].exGeographicBoundingBox = struct()
 		try:
-			layer[-1].exGeographicBoundingBox.westBoundLongitude = float(  layerDict[0]["EX_GeographicBoundingBox"][0][0]["westBoundLongitude"][0][2] )
-			layer[-1].exGeographicBoundingBox.eastBoundLongitude = float( layerDict[0]["EX_GeographicBoundingBox"][0][0]["eastBoundLongitude"][0][2] )
-			layer[-1].exGeographicBoundingBox.southBoundLatitude = float( layerDict[0]["EX_GeographicBoundingBox"][0][0]["southBoundLatitude"][0][2] )
-			layer[-1].exGeographicBoundingBox.northBoundLatitude = float( layerDict[0]["EX_GeographicBoundingBox"][0][0]["northBoundLatitude"][0][2] )
+			exgeo = layerDict[0]["EX_GeographicBoundingBox"][0][0]
+			# Create struct if exgeo exists
+			layer[-1].exGeographicBoundingBox = struct()
+
+			layer[-1].exGeographicBoundingBox.westBoundLongitude = float(  exgeo["westBoundLongitude"][0][2] )
+			layer[-1].exGeographicBoundingBox.eastBoundLongitude = float( exgeo[0][0]["eastBoundLongitude"][0][2] )
+			layer[-1].exGeographicBoundingBox.southBoundLatitude = float( exgeo[0][0]["southBoundLatitude"][0][2] )
+			layer[-1].exGeographicBoundingBox.northBoundLatitude = float( exgeo[0][0]["northBoundLatitude"][0][2] )
 		except:
 			pass
 
@@ -722,7 +775,8 @@ class getCapabilitiesObject:
 				pass
 
 
-
+			# Add inheritance
+			inheritWMS130(self.getCapStruct.capability.layer)
 
 
 
