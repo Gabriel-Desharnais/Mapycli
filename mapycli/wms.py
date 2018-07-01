@@ -32,11 +32,14 @@ def inheritWMS130(layerList):
 		for lay in layer.layer:
 			# check if ex_GeographicBoundingBox exists in child
 			try:
+				# If it exists, use the child definition
 				lay.exGeographicBoundingBox
 			except AttributeError:
+				# If it doesn't exist, try using the parent definition
 				try:
 					lay.exGeographicBoundingBox = layer.exGeographicBoundingBox
 				except AttributeError:
+					# If the parent has no definition, do nothing
 					pass
 
 		# try default to parent boundingBox
@@ -54,7 +57,8 @@ def inheritWMS130(layerList):
 					pass
 
 		# Replace Dimension
-		
+
+
 		# Try apply function on children
 		try:
 			inheritWMS130(layer.layer)
