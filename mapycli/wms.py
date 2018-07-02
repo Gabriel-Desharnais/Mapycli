@@ -21,11 +21,13 @@ def inheritWMS130(layerList):
 		# Add parent style to child
 		ls = layer.style
 		for lay in layer.layer:
+			# For every child in layer, append parent style to the children one
 			lay.style += ls
 
 		# Add parent CRS to child
 		crs = layer.crs
 		for lay in layer.layer:
+			# For every child layer, append parent crs list to the children one
 			lay.crs += crs
 
 		# try default to parent ex_GeographicBoundingBox
