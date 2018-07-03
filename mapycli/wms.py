@@ -87,8 +87,109 @@ def inheritWMS130(layerList):
 					pass
 
 		# Add AuthorityURL
-		
+		aut = layer.authorityURL
+		for lay in layer.layer:
+			# For every child layer, append parent authorityURL list to the children one
+			lay.authorityURL += aut
 
+		# Replace minScaleDenominator
+		for lay in layer.layer:
+			# for every child, check if there is a minScaleDenominator attribute
+			try:
+				lay.minScaleDenominator
+			except AttributeError:
+				# If not defined, try to default to minScaleDenominator of parent
+				try:
+					lay.minScaleDenominator = layer.minScaleDenominator
+				except AttributeError:
+					pass
+
+		# Replace maxScaleDenominator
+		for lay in layer.layer:
+			# for every child, check if there is a minScaleDenominator attribute
+			try:
+				lay.maxScaleDenominator
+			except AttributeError:
+				# If not defined, try to default to minScaleDenominator of parent
+				try:
+					lay.maxScaleDenominator = layer.maxScaleDenominator
+				except AttributeError:
+					pass
+
+
+		# Replace layer attributes
+		# Replace queryable
+		for lay in layer.layer:
+			# for every child, check if there is a queryable attribute
+			try:
+				lay.queryable
+			except AttributeError:
+				# If not defined, try to default to queryable of parent
+				try:
+					lay.queryable = layer.queryable
+				except AttributeError:
+					pass
+
+		# Replace cascaded
+		for lay in layer.layer:
+			# for every child, check if there is a cascaded attribute
+			try:
+				lay.cascaded
+			except AttributeError:
+				# If not defined, try to default to queryable of parent
+				try:
+					lay.cascaded = layer.cascaded
+				except AttributeError:
+					pass
+
+		# Replace opaque
+		for lay in layer.layer:
+			# for every child, check if there is a opaque attribute
+			try:
+				lay.opaque
+			except AttributeError:
+				# If not defined, try to default to opaque of parent
+				try:
+					lay.opaque = layer.opaque
+				except AttributeError:
+					pass
+
+		# Replace noSubsets
+		for lay in layer.layer:
+			# for every child, check if there is a noSubsets attribute
+			try:
+				lay.noSubsets
+			except AttributeError:
+				# If not defined, try to default to noSubsets of parent
+				try:
+					lay.noSubsets = layer.noSubsets
+				except AttributeError:
+					pass
+
+		# Replace fixedWidth
+		for lay in layer.layer:
+			# for every child, check if there is a fixedWidth attribute
+			try:
+				lay.fixedWidth
+			except AttributeError:
+				# If not defined, try to default to fixedWidth of parent
+				try:
+					lay.fixedWidth = layer.fixedWidth
+				except AttributeError:
+					pass
+
+		# Replace fixedHeight
+		for lay in layer.layer:
+			# for every child, check if there is a fixedHeight attribute
+			try:
+				lay.fixedHeight
+			except AttributeError:
+				# If not defined, try to default to fixedHeight of parent
+				try:
+					lay.fixedHeight = layer.fixedHeight
+				except AttributeError:
+					pass
+					
 		# Try apply function on children
 		try:
 			inheritWMS130(layer.layer)
