@@ -50,7 +50,7 @@ def inheritWMS130(layerList):
 			for lay in layer.layer:
 				# To every child, do the folowing:
 				try:
-					# If a child has a bbox with the same crs don't add the parent bbox to its available bbox.
+					# If a child has a bbox with the same crs, don't add the parent bbox to its available bbox.
 					crs = bbox.crs
 					if crs not in [subbou.crs for subbou in lay.boundingBox ]:
 						# Add the parent boundingBox to the child
@@ -59,7 +59,35 @@ def inheritWMS130(layerList):
 					pass
 
 		# Replace Dimension
+		for dim in layer.dimension:
+			# Go threw every dimension of the parent layer
+			for lay in layer.layer:
+				# To every child, do the folowing:
+				try:
+					# If a child has a dimension with the same name, don't add the parent dimension to its available bbox
+					name = dim.name
+					if name not in [subdim.name for subdim in lay.dimension]:
+						# Add the parent dimension to the child
+						lay.dimension.append(dim)
+				except AttributeError:
+					pass
 
+		# Replace Attribution
+		for lay in layer.layer:
+			# check if Attribution exists in child
+			try:
+				# If it exists, use the child definition
+				lay.attribution
+			except AttributeError:
+				# If it doesn't exist, try using the parent definition
+				try:
+					lay.attribution = layer.attribution
+				except AttributeError:
+					# If the parent has no definition, do nothing
+					pass
+
+		# Add AuthorityURL
+		
 
 		# Try apply function on children
 		try:
