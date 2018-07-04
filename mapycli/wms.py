@@ -189,7 +189,7 @@ def inheritWMS130(layerList):
 					lay.fixedHeight = layer.fixedHeight
 				except AttributeError:
 					pass
-					
+
 		# Try apply function on children
 		try:
 			inheritWMS130(layer.layer)
@@ -921,5 +921,23 @@ class getCapabilitiesObject:
 			# End there since this unknow object should not be processed
 			return
 
+	def getLayers(self):
+		# Return a list of all the name of the named layers
+		layer = []
+		def addlayers(layerStructList, layerList):
+			for lay in layerStructList:
+				# Add named layer to the list
+				try:
+					lay.name
+					layerList.append(lay.name)
+				except AttributeError:
+					pass
+				# Add named layer of the child
+				try:
+					addlayers(lay.layer, layerList)
+				except AttributeError:
+					pass
+		addlayers(self.getCapStruct.capability.layer, layer)
+		return layer
 # REFS:
 # [1] : https://bugs.python.org/issue18304
