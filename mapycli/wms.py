@@ -196,6 +196,34 @@ def inheritWMS130(layerList):
 		except AttributeError:
 			pass
 
+def defaultWMS130(layerList):
+	for layer in layerList:
+		# Apply default
+		# Queryable
+		if layer.queryable is None:
+			layer.queryable = False
+		# Cascaded
+		if layer.cascaded is None:
+			layer.cascaded = 0
+		# Opaque
+		if layer.opaque is None:
+			layer.opaque = False
+		# NoSubsets
+		if layer.noSubsets is None:
+			layer.noSubsets = False
+		# FixedWidth
+		if layer.fixedWidth is None:
+			layer.fixedWidth = 0
+		# FixedHeight
+		if layer.fixedHeight is None:
+			layer.fixedHeight = 0
+
+		# Apply to child
+		try:
+			defaultWMS130(layer.layer)
+		except AttributeError:
+			pass
+
 def addlayers(layerDictList):
 	# This fuction returns a list of layers and sublayers and fill the
 	# information in a struct class
@@ -360,9 +388,9 @@ def addlayers(layerDictList):
 			layer[-1].exGeographicBoundingBox = struct()
 
 			layer[-1].exGeographicBoundingBox.westBoundLongitude = float(  exgeo["westBoundLongitude"][0][2] )
-			layer[-1].exGeographicBoundingBox.eastBoundLongitude = float( exgeo[0][0]["eastBoundLongitude"][0][2] )
-			layer[-1].exGeographicBoundingBox.southBoundLatitude = float( exgeo[0][0]["southBoundLatitude"][0][2] )
-			layer[-1].exGeographicBoundingBox.northBoundLatitude = float( exgeo[0][0]["northBoundLatitude"][0][2] )
+			layer[-1].exGeographicBoundingBox.eastBoundLongitude = float( exgeo["eastBoundLongitude"][0][2] )
+			layer[-1].exGeographicBoundingBox.southBoundLatitude = float( exgeo["southBoundLatitude"][0][2] )
+			layer[-1].exGeographicBoundingBox.northBoundLatitude = float( exgeo["northBoundLatitude"][0][2] )
 		except:
 			pass
 
@@ -900,8 +928,15 @@ class getCapabilitiesObject:
 				pass
 
 			# Filling of the capability metadata
-			# Lack of documentation in ogc for request and expception
-
+			# Lack of documentation in ogc for request
+			# Fill Exception
+			try:
+				# Go threw every exception
+				self.getCapStruct.capability.exception = []
+				for ex in self.getCapDict["Capability"][0][0]["Exception"][0][0]["Format"]:
+					self.getCapStruct.capability.exception.append(ex[2])
+			except KeyError:
+				pass
 			# O Fill layers arg with a list of layers
 			try:
 				self.getCapStruct.capability.layer = addlayers( self.getCapDict["Capability"][0][0]["Layer"])
@@ -912,7 +947,8 @@ class getCapabilitiesObject:
 
 			# Add inheritance
 			inheritWMS130(self.getCapStruct.capability.layer)
-
+			# Add default
+			defaultWMS130(self.getCapStruct.capability.layer)
 
 
 
