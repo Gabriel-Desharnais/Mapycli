@@ -163,10 +163,10 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |        service.fees        |        &lt;Service&gt;&lt;Fees&gt;        |       str      | If multiple, first one kept. If none, fees will not be created in service. |
 |  service.accessConstraints  |  &lt;Service&gt;&lt;AccessConstraints&gt;   |       str      | If multiple, first one kept. If none, accessConstraints will not be created in service. |
 |    capability.exception    |    &lt;Capability&gt;&lt;Exception&gt;    |  list of str   | If multiple, first one kept. |
-|      capability.layer      |       &lt;Capability&gt;&lt;Layer&gt;     | list of struct | Exception if no tag. |
+|      capability.layer      |       &lt;Capability&gt;&lt;Layer&gt;     | list of struct | If no tag, variable will not be created. |
 |       ...layer[n].queryable       | &lt;Capability&gt;&lt;Layer&gt; | bool | If none, queryable will be set to default (False). Using attribute **queryable**. |
 |       ...layer[n].cascaded       | &lt;Capability&gt;&lt;Layer&gt; | int | If none, cascaded will be set to default (0). Using attribute **cascaded**. |
-|       ...layer[n].opaque       | &lt;Capability&gt;&lt;Layer&gt; | bool | If none, opaque will be set to default (false). Using attribute **cascaded**. |
+|       ...layer[n].opaque       | &lt;Capability&gt;&lt;Layer&gt; | bool | If none, opaque will be set to default (false). Using attribute **opaque**. |
 |       ...layer[n].noSubsets       | &lt;Capability&gt;&lt;Layer&gt; | bool | If none, noSubsets will be set to default (false). Using attribute **noSubsets**. |
 |       ...layer[n].fixedWidth       | &lt;Capability&gt;&lt;Layer&gt; | int | If none, fixedWidth will be set to default (0). Using attribute **fixedWidth**. |
 |       ...layer[n].fixedHeight       | &lt;Capability&gt;&lt;Layer&gt; | int | If none, fixedHeight will be set to default (0). Using attribute **fixedHeight**. |
@@ -175,11 +175,11 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...layer.name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Name&gt; | str | If none, name will not be created, if multiple first one kept. |
 |       ...layer.abstract       | &lt;Capability&gt;&lt;Layer&gt;&lt;Abstract&gt; | str | If none, name will not be created, if multiple first one kept. |
 |       ...layer.keywordList       | &lt;Capability&gt;&lt;Layer&gt;&lt;KeywordList&gt; | list of str | If none, name will not be created, if multiple first one kept. |
-|       ...layer.style       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt; |  list of struct  | If none, name will not be created. |
-|       ...style[n].name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Name&gt; | str | Exception if no tag, if multiple first one kept. |
-|       ...style[n].title       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Title&gt; | str | Exception if no tag, if multiple first one kept. |
-|       ...style[n].abstract       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Abstract&gt; | str | Exception if no tag, if multiple first one kept. |
-|       ...style[n].legendUrl      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt; | struct | If multiple first one kept. |
+|       ...layer.style       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt; |  list of struct  | If none, style will be created with an empty list. |
+|       ...style[n].name       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Name&gt; | str | If multiple, first one kept. |
+|       ...style[n].title       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Title&gt; | str | If multiple, first one kept. |
+|       ...style[n].abstract       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;Abstract&gt; | str | If multiple, first one kept. |
+|       ...style[n].legendUrl      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt; | struct | If multiple first one kept. If no tag, name will not be defined. |
 |       ...legendUrl.width      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt; | int | If multiple first one kept. attribute **width** |
 |       ...legendUrl.height      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt; | int | If multiple first one kept. attribute **height** |
 |       ...legendUrl.format      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt;&lt;Format&gt; | str | If multiple first one kept. |
