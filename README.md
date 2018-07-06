@@ -24,7 +24,7 @@ import mapycli
 ```
 ### Session
 **Not available yet**
-Although the creation of a session is not mandatory to do requests, it is highly recommanded to use them because it add a lot of functionality and they can make your life easier. A session is an object that will keep in memory some parameters and most importantly the information about ressource available on the server. Session are service specific ('WMS','WFS','WCS','WPS','CWS')
+Although the creation of a session is not mandatory to do requests, it is highly recommanded to use them because it add a lot of functionality and they can make your life easier. A session is an object that will keep in memory some parameters and most importantly the information about resource available on the server. Session are service specific ('WMS','WFS','WCS','WPS','CWS')
 #### Creating a session
 To create a session you should do:
 ``` python
@@ -141,8 +141,8 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |        service.name        |         &lt;Service&gt;&lt;Name&gt;       |       str      | Expception if no tag. If multiple, first one kept. |
 |        service.title       |        &lt;Service&gt;&lt;Title&gt;       |       str      | Exception if no tag. If multiple, first one kept. |
 |      service.abstract      |      &lt;Service&gt;&lt;Abstract&gt;      |       str      | If none, name will not be created. If multiple first one kept. |
-|   service.onlineRessource   |   &lt;Service&gt;&lt;OnlineRessource&gt;   |       str      | Exception thrown if no tag. If multiple, first one kept. Attribute **xlink:href** in **OnlineRessource** |
-|    service.keywordList     |    &lt;Service&gt;&lt;KeywordList&gt;     |  list of str   | If none, name will not be created. If multiple, first one kept. |
+|   service.onlineResource   |   &lt;Service&gt;&lt;OnlineResource&gt;   |       str      | Exception thrown if no tag. If multiple, first one kept. Attribute **xlink:href** in **OnlineResource** |
+|    service.keywordList     |    &lt;Service&gt;&lt;KeywordList&gt;     |  list of str   | If none, name will be created with empty list. If multiple, first one kept. |
 | service.contactInformation | &lt;Service&gt;&lt;ContactInformation&gt; |     struct     | If none, name will not be created. If multiple, first one kept. |
 | ...contactInformation.contactPersonPrimary | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactPersonPrimary&gt; |     struct     | If none, name will not be created. If multiple, first one kept. |
 | ...contactPersonPrimary.contactPerson | &lt;Service&gt;&lt;ContactInformation&gt;&lt;ContactPersonPrimary&gt;&lt;ContactPerson&gt; |       str      | If none, name will not be created. If multiple, first one kept. |
@@ -162,7 +162,7 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |      service.maxHeight     |      &lt;Service&gt;&lt;MaxHeight&gt;     |       int      | If multiple, first one kept. If none, maxHeight will not be created in service. |
 |        service.fees        |        &lt;Service&gt;&lt;Fees&gt;        |       str      | If multiple, first one kept. If none, fees will not be created in service. |
 |  service.accessConstraints  |  &lt;Service&gt;&lt;AccessConstraints&gt;   |       str      | If multiple, first one kept. If none, accessConstraints will not be created in service. |
-|    capability.exception    |    &lt;Capability&gt;&lt;Exception&gt;    |  list of str   | Exception if no tag, if multiple first one kept. |
+|    capability.exception    |    &lt;Capability&gt;&lt;Exception&gt;    |  list of str   | If multiple, first one kept. |
 |      capability.layer      |       &lt;Capability&gt;&lt;Layer&gt;     | list of struct | Exception if no tag. |
 |       ...layer[n].queryable       | &lt;Capability&gt;&lt;Layer&gt; | bool | If none, queryable will be set to default (False). Using attribute **queryable**. |
 |       ...layer[n].cascaded       | &lt;Capability&gt;&lt;Layer&gt; | int | If none, cascaded will be set to default (0). Using attribute **cascaded**. |
@@ -183,10 +183,10 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...legendUrl.width      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt; | int | If multiple first one kept. attribute **width** |
 |       ...legendUrl.height      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt; | int | If multiple first one kept. attribute **height** |
 |       ...legendUrl.format      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt;&lt;Format&gt; | str | If multiple first one kept. |
-|       ...legendUrl.onlineRessource      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt;&lt;OnlineRessource&gt; | str | If multiple first one kept. use value in **xlink:href** attribute |
+|       ...legendUrl.onlineResource      | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;LegendURL&gt;&lt;OnlineResource&gt; | str | If multiple first one kept. use value in **xlink:href** attribute |
 |       ...style[n].styleSheetURL       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;StyleSheetURL&gt; | struct | If multiple, first one kept. |
 |       ...styleSheetURL.format       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;StyleSheetURL&gt;&lt;Format&gt; | str | If multiple, first one kept. |
-|       ...styleSheetURL.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;StyleSheetURL&gt;&lt;OnlineRessource&gt; | str | If multiple, first one kept. **Attribute xlink:href** |
+|       ...styleSheetURL.onlineResource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;StyleSheetURL&gt;&lt;OnlineResource&gt; | str | If multiple, first one kept. **Attribute xlink:href** |
 |       ...layer.crs       | &lt;Capability&gt;&lt;Layer&gt;&lt;CRS&gt; | list of str | If none, name will be created with an empty list. |
 |       ...layer.exGeographicBoundingBox       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt; | struct | If none, name will be created with an empty struct. If multiple, first one kept. |
 |       ...exGeographicBoundingBox.westBoundLongitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;westBoundLongitude&gt; | float | If none, exception thrown. If multiple, first one kept. |
@@ -203,28 +203,28 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...boundingBox[n].resy       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute resy from &lt;BoundingBox&gt; |
 |       ...layer[n].attribution       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt; | struct | If multiple, first one used. |
 |       ...attribution.title       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;Title&gt; | str | If multiple, first one used. |
-|       ...attribution.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;OnlineRessource&gt; | str | If multiple, first one used. using attribute **xlink:href**. |
+|       ...attribution.onlineResource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;OnlineResource&gt; | str | If multiple, first one used. using attribute **xlink:href**. |
 |       ...attribution.logoURL       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt; | struct | If multiple, first one used. |
 |       ...logoURL.width       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt; | int | If multiple, first one used. Using attribute **width**. |
 |       ...logoURL.height       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt; | int | If multiple, first one used. Using attribute **height**. |
 |       ...logoURL.format       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt;&lt;Format&gt; | str | If multiple, first one used. |
-|       ...logoURL.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt;&lt;OnlineRessource&gt; | str | If multiple, first one used. using attribute **xlink:href**. |
+|       ...logoURL.onlineResource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt;&lt;LogoURL&gt;&lt;OnlineResource&gt; | str | If multiple, first one used. using attribute **xlink:href**. |
 |       ...layer[n].authorityURL       | &lt;Capability&gt;&lt;Layer&gt;&lt;AuthorityURL&gt; | struct list |  |
 |       ...authorityURL[n].name       | &lt;Capability&gt;&lt;Layer&gt;&lt;AuthorityURL&gt; | str | If multiple, first one used. Using attribute **name**. |
-|       ...authorityURL[n].onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;AuthorityURL&gt;&lt;OnlineRessource&gt; | str | If multiple, first one used. |
+|       ...authorityURL[n].onlineResource       | &lt;Capability&gt;&lt;Layer&gt;&lt;AuthorityURL&gt;&lt;OnlineResource&gt; | str | If multiple, first one used. |
 |       ...layer[n].identifier       | &lt;Capability&gt;&lt;Layer&gt;&lt;Identifier&gt; | struct list |  |
 |       ...identifier[n].id       | &lt;Capability&gt;&lt;Layer&gt;&lt;Identifier&gt; | str | Actual value enclosed in **Identifier** tag  |
 |       ...identifier[n].authority       | &lt;Capability&gt;&lt;Layer&gt;&lt;Identifier&gt; | str | If multiple, first one used. Using attribute **authority**.  |
 |       ...layer[n].metadataURL       | &lt;Capability&gt;&lt;Layer&gt;&lt;MetadataURL&gt; | struct list |  |
 |       ...metadataURL.type       | &lt;Capability&gt;&lt;Layer&gt;&lt;MetadataURL&gt; | str | If multple, first one used. Using attribute **type** |
 |       ...metadataURL.format       | &lt;Capability&gt;&lt;Layer&gt;&lt;MetadataURL&gt;&lt;Format&gt; | str | If multple, first one used. |
-|       ...metadataURL.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;MetadataURL&gt;&lt;OnlineRessource&gt; | str | If multple, first one used. Using attribute **xlink:href**. |
+|       ...metadataURL.onlineResource       | &lt;Capability&gt;&lt;Layer&gt;&lt;MetadataURL&gt;&lt;OnlineResource&gt; | str | If multple, first one used. Using attribute **xlink:href**. |
 |       ...layer[n].dataURL       | &lt;Capability&gt;&lt;Layer&gt;&lt;DataURL&gt; | struct | If multple, first one used. |
 |       ...dataURL.format       | &lt;Capability&gt;&lt;Layer&gt;&lt;DataURL&gt;&lt;Format&gt; | str | If multple, first one used. |
-|       ...dataURL.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;DataURL&gt;&lt;OnlineRessource&gt; | str | If multple, first one used. Using attribute **xlink:href**. |
+|       ...dataURL.onlineResource       | &lt;Capability&gt;&lt;Layer&gt;&lt;DataURL&gt;&lt;OnlineResource&gt; | str | If multple, first one used. Using attribute **xlink:href**. |
 |       ...layer[n].featureListURL       | &lt;Capability&gt;&lt;Layer&gt;&lt;FeatureListURL&gt; | struct | If multple, first one used. |
 |       ...featureListURL.format       | &lt;Capability&gt;&lt;Layer&gt;&lt;FeatureListURL&gt;&lt;Format&gt; | str | If multple, first one used. |
-|       ...featureListURL.onlineRessource       | &lt;Capability&gt;&lt;Layer&gt;&lt;FeatureListURL&gt;&lt;OnlineRessource&gt; | str | If multple, first one used. Using attribute **xlink:href**. |
+|       ...featureListURL.onlineResource       | &lt;Capability&gt;&lt;Layer&gt;&lt;FeatureListURL&gt;&lt;OnlineResource&gt; | str | If multple, first one used. Using attribute **xlink:href**. |
 |       ...layer[n].minScaleDenominator       | &lt;Capability&gt;&lt;Layer&gt;&lt;MinScaleDenominator&gt; | float | If multple, first one used. |
 |       ...layer[n].maxScaleDenominator       | &lt;Capability&gt;&lt;Layer&gt;&lt;MaxScaleDenominator&gt; | float | If multple, first one used. |
 |       ...layer[n].dimension       | &lt;Capability&gt;&lt;Layer&gt;&lt;Dimension&gt; | struct list |  |
