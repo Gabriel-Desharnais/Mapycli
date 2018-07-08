@@ -189,10 +189,10 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...styleSheetURL.onlineResource       | &lt;Capability&gt;&lt;Layer&gt;&lt;Style&gt;&lt;StyleSheetURL&gt;&lt;OnlineResource&gt; | str | If multiple, first one kept. **Attribute xlink:href** |
 |       ...layer.crs       | &lt;Capability&gt;&lt;Layer&gt;&lt;CRS&gt; | list of str | If none, name will be created with an empty list. |
 |       ...layer.exGeographicBoundingBox       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt; | struct | If none, name will be created with an empty struct. If multiple, first one kept. |
-|       ...exGeographicBoundingBox.westBoundLongitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;westBoundLongitude&gt; | float | If none, exception thrown. If multiple, first one kept. |
-|       ...exGeographicBoundingBox.eastBoundLongitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;eastBoundLongitude&gt; | float | If none, exception thrown. If multiple, first one kept. |
-|       ...exGeographicBoundingBox.southBoundLatitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;southBoundLatitude&gt; | float | If none, exception thrown. If multiple, first one kept. |
-|       ...exGeographicBoundingBox.northBoundLatitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;northBoundLatitude&gt; | float | If none, exception thrown. If multiple, first one kept. |
+|       ...exGeographicBoundingBox.westBoundLongitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;westBoundLongitude&gt; | float |  If multiple, first one kept. |
+|       ...exGeographicBoundingBox.eastBoundLongitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;eastBoundLongitude&gt; | float |  If multiple, first one kept. |
+|       ...exGeographicBoundingBox.southBoundLatitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;southBoundLatitude&gt; | float |  If multiple, first one kept. |
+|       ...exGeographicBoundingBox.northBoundLatitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;northBoundLatitude&gt; | float |  If multiple, first one kept. |
 |       ...layer.boundingBox       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | list of struct | If none, exception thrown. |
 |       ...boundingBox[n].crs       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | str | If none, exception thrown. Attribute CRS from &lt;BoundingBox&gt; |
 |       ...boundingBox[n].minx       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | If none, exception thrown. Attribute minx from &lt;BoundingBox&gt; |
