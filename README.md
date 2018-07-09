@@ -193,7 +193,7 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...exGeographicBoundingBox.eastBoundLongitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;eastBoundLongitude&gt; | float |  If multiple, first one kept. |
 |       ...exGeographicBoundingBox.southBoundLatitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;southBoundLatitude&gt; | float |  If multiple, first one kept. |
 |       ...exGeographicBoundingBox.northBoundLatitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;northBoundLatitude&gt; | float |  If multiple, first one kept. |
-|       ...layer.boundingBox       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | list of struct | If none, exception thrown. |
+|       ...layer.boundingBox       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | list of struct |  |
 |       ...boundingBox[n].crs       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | str | If none, exception thrown. Attribute CRS from &lt;BoundingBox&gt; |
 |       ...boundingBox[n].minx       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | If none, exception thrown. Attribute minx from &lt;BoundingBox&gt; |
 |       ...boundingBox[n].miny       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | If none, exception thrown. Attribute miny from &lt;BoundingBox&gt; |
