@@ -195,10 +195,10 @@ Here is a list of all the supported tags and their place in the `getCapStruct` o
 |       ...exGeographicBoundingBox.northBoundLatitude       | &lt;Capability&gt;&lt;Layer&gt;&lt;EX_GeographicBoundingBox&gt;&lt;northBoundLatitude&gt; | float |  If multiple, first one kept. |
 |       ...layer.boundingBox       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | list of struct |  |
 |       ...boundingBox[n].crs       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | str | Attribute CRS from &lt;BoundingBox&gt; |
-|       ...boundingBox[n].minx       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | If none, exception thrown. Attribute minx from &lt;BoundingBox&gt; |
-|       ...boundingBox[n].miny       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | If none, exception thrown. Attribute miny from &lt;BoundingBox&gt; |
-|       ...boundingBox[n].maxx       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | If none, exception thrown. Attribute maxx from &lt;BoundingBox&gt; |
-|       ...boundingBox[n].maxy       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | If none, exception thrown. Attribute maxy from &lt;BoundingBox&gt; |
+|       ...boundingBox[n].minx       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute minx from &lt;BoundingBox&gt; |
+|       ...boundingBox[n].miny       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute miny from &lt;BoundingBox&gt; |
+|       ...boundingBox[n].maxx       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute maxx from &lt;BoundingBox&gt; |
+|       ...boundingBox[n].maxy       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute maxy from &lt;BoundingBox&gt; |
 |       ...boundingBox[n].resx       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute resx from &lt;BoundingBox&gt; |
 |       ...boundingBox[n].resy       | &lt;Capability&gt;&lt;Layer&gt;&lt;BoundingBox&gt; | float | Attribute resy from &lt;BoundingBox&gt; |
 |       ...layer[n].attribution       | &lt;Capability&gt;&lt;Layer&gt;&lt;Attribution&gt; | struct | If multiple, first one used. |
