@@ -8,7 +8,7 @@ def session(inheritance):
 	# method supported by the service that's calling it
 
 	class Session(inheritance):
-		def __init__(self,url=None):
+		def __init__(self,*args, **kargs):
 			# This method should have two behavior if an url is given,
 			# Do a GetCapabilities at this url, else just create the object
 
@@ -21,20 +21,41 @@ def session(inheritance):
 			self.sources = {}
 
 			# Check to see if an url arguments was passed
-			if url:
+			if not args == ():
 				# Go request a GetCapabilities and store valuable informations
 				# at the right place
-				getCapRes = self.getcapabilities(url)
+				getCapRes = self.getcapabilities(*args, **kargs)
 
 				# Add the GetCapabilities to the dictionary of sources
-				self.sources[url] = getCap
-		def update(self):
+				self.sources[args[0]] = getCapRes
+		def update(self,*args,**kargs):
 			# This method update information about layers with new
 			# GetCapabilities
-			pass
+			if args == ():
+				# If no url where given, update all
+				for sou in self.sources:
+					self.sources[sou] = self.getcapabilities(sou)
+			else:
+				# If a url where given, update/add only this url.
+				try:
+					self.sources[args[0]] = self.getcapabilities(*args,**kargs)
+				except:
+					pass
 
-		def reset(self):
+
+
+
+		def reset(self,*args,**kargs):
 			# This method erase old information about layers and reload it with
 			# a new GetCapabilities
-			pass
+			if args == ():
+				# If no url where given, reset all
+					self.sources = {}
+			else:
+				# If a url where given, update/add only this url.
+				try:
+					self.sources = {}
+					self.sources[args[0]] = self.getcapabilities(*args,**kargs)
+				except:
+					pass
 	return Session
