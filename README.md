@@ -12,6 +12,8 @@ This package is develloped and tested on a linux machine it should work on other
 ## Dependencies
 This is a list of package that **Mapycli** relies on.
 
+- requests
+
 ## License
 This package is under MIT license, for more information look in **LICENSE** file.
 
