@@ -25,7 +25,6 @@ To import the package in your program use:
 import mapycli
 ```
 ### Session
-**Not available yet**
 Although the creation of a session is not mandatory to do requests, it is highly recommanded to use them because it add a lot of functionality and they can make your life easier. A session is an object that will keep in memory some parameters and most importantly the information about ressource available on the server. Session are service specific ('WMS','WFS','WCS','WPS','CWS')
 #### Creating a session
 To create a session you should do:
@@ -41,10 +40,17 @@ se = mapycli.service.session(URL,*args,**kargs)
 ```
 
 #### Action on session
-Sessions allow 2 type of opperation to control it.
+Sessions allow 3 type of opperation to control it.
+
+##### Add
+The add opperation enables you to add a source to the session and ask for the getcapabilities of this source. This method returns a getCapabilitiesObject. 
+
+``` python
+re = se.add(URL)
+```
 
 ##### Update
-The update opperation enalbles you to update the informations about the layers. You can do an update on every layers by doing
+The update opperation enables you to update the informations about the layers. You can do an update on every layers by doing
 ``` python
 se.update()
 ```

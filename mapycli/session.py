@@ -10,7 +10,7 @@ def session(inheritance):
 	class Session(inheritance):
 		def __init__(self,*args, **kargs):
 			# This method should have two behavior if an url is given,
-			# Do a GetCapabilities at this url, else just create the object
+			# Do a Getcapabilities at this url, else just create the object
 
 			# Go fetch the service default version and use it as the default
 			# in the new session
@@ -22,15 +22,15 @@ def session(inheritance):
 
 			# Check to see if an url arguments was passed
 			if not args == ():
-				# Go request a GetCapabilities and store valuable informations
+				# Go request a Getcapabilities and store valuable informations
 				# at the right place
 				getCapRes = self.getcapabilities(*args, **kargs)
 
-				# Add the GetCapabilities to the dictionary of sources
+				# Add the Getcapabilities to the dictionary of sources
 				self.sources[args[0]] = getCapRes
 		def update(self,*args,**kargs):
 			# This method update information about layers with new
-			# GetCapabilities
+			# Getcapabilities
 			if args == ():
 				# If no url where given, update all
 				for sou in self.sources:
@@ -41,6 +41,15 @@ def session(inheritance):
 					self.sources[args[0]] = self.getcapabilities(*args,**kargs)
 				except:
 					pass
+				
+		def add(self,*args,**kargs):
+			# This method will add a source in the session and do a getCap
+			try:
+				# Do nothing if there is already a source named after this url
+				self.sources[args[0]]
+			except KeyError:
+				self.sources[args[0]] = self.getcapabilities(*args,**kargs)
+				return self.sources[args[0]]
 
 
 
