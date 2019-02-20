@@ -703,9 +703,11 @@ class WMS:
 	# This class implement the method necessary to do request to a wms server
 	defaultVersion = "1.3.0"
 	session = None
+	autoDecode = None
 
 	def __int__(self):
 		self.version = defaultVersion
+		self.autoDecode = autoDecode
 
 	def getcapabilities(self,url,request="GetCapabilities",
 						service="WMS",
@@ -725,21 +727,23 @@ class WMS:
 		# download content right away (stream), do not wait for r.text
 		r = requests.get(url, params=params, stream=False)
 
-		# TODO: We should do something to accelarate the parsing of text in
-		#		requests to detect encoding faster.
 
 		# Send the response in a new getCapabilitiesObject
-		gco = getCapabilitiesObject(r)
+		gco = getCapabilitiesObject(r, self.autoDecode)
 
 		# Return the getCapabilitiesObject to the user
 		return gco
 
 class getCapabilitiesObject:
-	def __init__(self,response):
+	def __init__(self, response, autoDecode):
 		self.response = response
-
+		
 		# Get text from the response
-		text = self.response.text
+		if autoDecode is None:
+			#Auto Decode
+			text = self.response.text
+		else:
+			text = self.response.content.decode(autoDecode,"replace")
 
 		# Verify that the response is of type xml before trying to parse it
 		type = self.response.headers['content-type'] # Get type of document

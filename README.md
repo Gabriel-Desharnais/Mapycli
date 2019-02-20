@@ -83,6 +83,12 @@ The default values are:
 | WCS | 2.0 |
 | WPS | 2.0 |
 
+If you want session requests to be automaticaly decoded with a seledted encoding e.g. `utf-8` (so it's faster).
+
+```python
+se.autoDecode = "utf-8"
+```
+
 
 ### WMS
 **not available yet**
