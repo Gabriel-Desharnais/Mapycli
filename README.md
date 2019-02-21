@@ -121,10 +121,21 @@ usage
 ``` python
 getCapRes = mapycli.wms.getcapabilities(url,service="WMS",request="GetCapabilities",version="1.3.0",format="application/vnd.ogc.se_xml",**kargs)
 ```
-every kargs given to getcapabilities will be url encoded and passed directly to the server. The function returns a `getCapabilitiesObject` object. If the format of the server response is the default one (application/xml) mapycli will parse the response, otherwise the only functionality provided by `getCapabilitiesObject` will be the
-``` python
-Res = getCapRes.response
-```
+every kargs given to getcapabilities will be url encoded and passed directly to the server. The function returns a `getCapabilitiesObject` object. If the format of the server response is the default one (application/xml) mapycli will parse the response.
+
+Here is a list of the method and variable defined within `getCapabilitiesObject`:
+| Call | Description | example |
+| `.response` | This will return you the **requests** response | `Res = getCapRes.response` |
+| `.listNamedLayers()` | This method will return you a list of the names of all named layer found in getCap | `layers = getCapRes.listNamedLayers()`|
+| `.getLayerByName(name)` | This method will return you the layerObject of the layer with the specified name | `layer = getCapRes.getLayerByName(name)` |
+
+
+Here is a list of the method and variable defined within `layerObject`:
+| Call | Description | example |
+| `.struct()` | Returns the capability struct of the layer | `layerStruct = layer.struct` |
+| `.dimensionList()` | Returns a list of all dimenssion available for this layer | `dim = layer.dimensionList()` |
+| `.dimensionExt(dim)` | Returns the extent or step of a given dimension for a layer | `ext = layer.dimensionExt(dim)` |
+| `.getMap(**kargs,)` | Returns a `getMapObject` for a layer | `map = layer.getMap()` |
 This will return you the **requests** response
 
 If you want to go threw the basic parsing of the xml file you can use `getCapDict`. This variable is a dictionary that contains lists of every tags with their respective values. Therefore, the content of every tags with a given label at root level are assembled together in a list and placed in the dict with their label as key.
