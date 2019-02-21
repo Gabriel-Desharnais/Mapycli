@@ -1005,5 +1005,8 @@ class LayerObject:
 	def __init__(self,theStruct):
 		assert theStruct is not None
 		self.theStruct = theStruct
+	
+	def struct(self):
+		return self.theStruct
 # REFS:
 # [1] : https://bugs.python.org/issue18304
