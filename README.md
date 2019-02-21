@@ -43,7 +43,7 @@ se = mapycli.service.session(URL,*args,**kargs)
 Sessions allow 3 type of opperation to control it.
 
 ##### Add
-The add opperation enables you to add a source to the session and ask for the getcapabilities of this source. This method returns a getCapabilitiesObject. 
+The add opperation enables you to add a source to the session and ask for the getcapabilities of this source. This method returns a getCapabilitiesObject.
 
 ``` python
 re = se.add(URL)
@@ -300,6 +300,20 @@ e.g.
 layers = getCapRes.getLayers()
 ```
 #### GetMap
+usage
+``` python
+getMapRes = mapycli.wms.getmap(url, version="1.3.0", request="GetMap", layers="", styles="", crs="", bbox="", width="", height="", format="", **kargs)
+```
+every kargs given to getmap will be url encoded and passed directly to the server. The function returns a `mapObject` object.
+
+##### mapObject
+This object has the following methods and properties
+
+| Call | Description | example |
+| ---- | ----------- | ------- |
+| `.response` | Give you the **requests** getmap response | `getMapRes.response.headers['content-Type']` |
+| `.saveImageAs(fileName)` | Will write the image in a file at the specified location **NOTE:** this will write over any file. | `getMapRes.saveImageAs("file.png")` |
+
 #### GetFeatureInfo
 #### DescribeLayer
 #### GetLegendGraphic

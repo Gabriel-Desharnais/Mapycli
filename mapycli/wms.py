@@ -733,6 +733,23 @@ class WMS:
 
 		# Return the getCapabilitiesObject to the user
 		return gco
+	
+	def getmap(self, url, version=False, request="GetMap", layers="", styles="", crs="", bbox="", width="", height="", format="", **kargs):
+		# This method does a getmap request to a wms server
+		
+		# Check if a version karg as been passed to the method
+		if version is False:
+			# Place default value for version
+			version = self.version
+		
+		# Add all parameters to a dict called params
+		params = {"version":version, "request":request, "layers":layers, "styles":styles, "crs":crs, "bbox":bbox, "width":width, "height":height, "format":format}
+		params.update(kargs)
+		
+		# Do a get request to the url, send it the params in the url and
+		# download content right away (stream), do not wait for r.text
+		r = requests.get(url, params=params, stream=False)
+		return mapObject(r)
 
 class getCapabilitiesObject:
 	def __init__(self, response, autoDecode):
@@ -999,7 +1016,17 @@ class getCapabilitiesObject:
 					pass
 		return LayerObject(search(self.getCapStruct.capability.layer))
 	
+class mapObject:
+	def __init__(self, response):
+		self.response = response
+		
+		#Do stuff to manage unsuccessfull getMap
 	
+	def saveImageAs(self, fileName, writeOver=True):
+		#TODO add option to writeOver or not
+		with open(fileName, 'wb') as f:
+			f.write(self.response.content)
+
 class LayerObject:
 	# This class manages layers
 	def __init__(self,theStruct):
