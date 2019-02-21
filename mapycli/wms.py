@@ -979,5 +979,31 @@ class getCapabilitiesObject:
 					pass
 		addlayers(self.getCapStruct.capability.layer, layer)
 		return layer
+	
+	def getLayerByName(self, name):
+		# Returns a layerObject of the layer named as 'name'
+		def search(layerStructList):
+			for lay in layerStructList:
+				# look for named layer
+				try:
+					if lay.name == name:
+						return lay
+				except AttributeError:
+					pass
+				try:
+					#search in child
+					result = search(lay.layer)
+					if result is not None:
+						return result
+				except AttributeError:
+					pass
+		return LayerObject(search(self.getCapStruct.capability.layer))
+	
+	
+class LayerObject:
+	# This class manages layers
+	def __init__(self,theStruct):
+		assert theStruct is not None
+		self.theStruct = theStruct
 # REFS:
 # [1] : https://bugs.python.org/issue18304

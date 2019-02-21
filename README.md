@@ -126,6 +126,7 @@ every kargs given to getcapabilities will be url encoded and passed directly to 
 Here is a list of the method and variable defined within `getCapabilitiesObject`:
 
 | Call | Description | example |
+| ---- | ----------- | ------- |
 | `.response` | This will return you the **requests** response | `Res = getCapRes.response` |
 | `.listNamedLayers()` | This method will return you a list of the names of all named layer found in getCap | `layers = getCapRes.listNamedLayers()`|
 | `.getLayerByName(name)` | This method will return you the layerObject of the layer with the specified name | `layer = getCapRes.getLayerByName(name)` |
@@ -134,6 +135,7 @@ Here is a list of the method and variable defined within `getCapabilitiesObject`
 Here is a list of the method and variable defined within `layerObject`:
 
 | Call | Description | example |
+| ---- | ----------- | ------- |
 | `.struct()` | Returns the capability struct of the layer | `layerStruct = layer.struct` |
 | `.dimensionList()` | Returns a list of all dimenssion available for this layer | `dim = layer.dimensionList()` |
 | `.dimensionExt(dim)` | Returns the extent or step of a given dimension for a layer | `ext = layer.dimensionExt(dim)` |
