@@ -961,7 +961,7 @@ class getCapabilitiesObject:
 			# End there since this unknow object should not be processed
 			return
 
-	def getLayers(self):
+	def listNamedLayers(self):
 		# Return a list of all the name of the named layers
 		layer = []
 		def addlayers(layerStructList, layerList):
