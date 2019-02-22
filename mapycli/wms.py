@@ -729,7 +729,7 @@ class WMS:
 
 
 		# Send the response in a new getCapabilitiesObject
-		gco = getCapabilitiesObject(r, self.autoDecode)
+		gco = getCapabilitiesObject(r, self.autoDecode, url, self)
 
 		# Return the getCapabilitiesObject to the user
 		return gco
@@ -752,9 +752,10 @@ class WMS:
 		return mapObject(r)
 
 class getCapabilitiesObject:
-	def __init__(self, response, autoDecode):
+	def __init__(self, response, autoDecode, source, session):
 		self.response = response
-		
+		self. source = source
+		self.session = session
 		# Get text from the response
 		if autoDecode is None:
 			#Auto Decode
@@ -1014,7 +1015,7 @@ class getCapabilitiesObject:
 						return result
 				except AttributeError:
 					pass
-		return LayerObject(search(self.getCapStruct.capability.layer))
+		return LayerObject(search(self.getCapStruct.capability.layer), self.source, self.session)
 	
 class mapObject:
 	def __init__(self, response):
@@ -1029,11 +1030,22 @@ class mapObject:
 
 class LayerObject:
 	# This class manages layers
-	def __init__(self,theStruct):
+	def __init__(self,theStruct, source, session):
 		assert theStruct is not None
 		self.theStruct = theStruct
-	
+		self.source = source
+		self.session = session
+		
 	def struct(self):
 		return self.theStruct
+	
+	def getMap(self, **kargs):
+		# This method returns a mapObject it simply does a wms.getmap with autofill on certain fields
+		params = {"layers":self.theStruct.name, 
+					"styles":self.theStruct.style[0].name,
+					"crs":self.theStruct.boundingBox[0].crs,
+					"bbox":"%s,%s,%s,%s"%(self.theStruct.boundingBox[0].minx, self.theStruct.boundingBox[0].miny, self.theStruct.boundingBox[0].maxx,self.theStruct.boundingBox[0].maxy)}
+		params.update(kargs)
+		return self.session.getmap(self.source, **params) 
 # REFS:
 # [1] : https://bugs.python.org/issue18304
