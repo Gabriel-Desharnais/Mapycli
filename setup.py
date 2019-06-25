@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 import mapycli
 setup(
     name='mapycli',
-    version='0.0.0.3',
+    version='0.0.0.5',
     description='Python module for client queries to OGC standard web services',
     url='https://github.com/Gabriel-Desharnais/Mapycli',
     author='Gabriel Desharnais',

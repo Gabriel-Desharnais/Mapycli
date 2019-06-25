@@ -733,19 +733,19 @@ class WMS:
 
 		# Return the getCapabilitiesObject to the user
 		return gco
-	
-	def getmap(self, url, version=False, request="GetMap", layers="", styles="", crs="", bbox="", width="", height="", format="", **kargs):
+
+	def getmap(self, url, version=False, request="GetMap", layers="", styles="", crs="", bbox="", width="", height="", format="", service = "wms", exceptions="XML", **kargs):
 		# This method does a getmap request to a wms server
-		
+
 		# Check if a version karg as been passed to the method
 		if version is False:
 			# Place default value for version
 			version = self.version
-		
+
 		# Add all parameters to a dict called params
-		params = {"version":version, "request":request, "layers":layers, "styles":styles, "crs":crs, "bbox":bbox, "width":width, "height":height, "format":format}
+		params = {"version":version, "service":service, "exceptions":exceptions, "request":request, "layers":layers, "styles":styles, "crs":crs, "bbox":bbox, "width":width, "height":height, "format":format, }
 		params.update(kargs)
-		
+
 		# Do a get request to the url, send it the params in the url and
 		# download content right away (stream), do not wait for r.text
 		r = requests.get(url, params=params, stream=False)
@@ -766,7 +766,7 @@ class getCapabilitiesObject:
 		# Verify that the response is of type xml before trying to parse it
 		type = self.response.headers['content-type'] # Get type of document
 		# test type
-		if type == 'application/xml':
+		if type in ['application/xml', 'text/xml; charset=UTF-8', 'text/xml']:
 			# Parse the xml
 			self.root = ET.fromstring(text)
 
@@ -997,7 +997,7 @@ class getCapabilitiesObject:
 					pass
 		addlayers(self.getCapStruct.capability.layer, layer)
 		return layer
-	
+
 	def getLayerByName(self, name):
 		# Returns a layerObject of the layer named as 'name'
 		def search(layerStructList):
@@ -1016,13 +1016,21 @@ class getCapabilitiesObject:
 				except AttributeError:
 					pass
 		return LayerObject(search(self.getCapStruct.capability.layer), self.source, self.session)
-	
+
 class mapObject:
 	def __init__(self, response):
 		self.response = response
-		
+		self.success = True
+
+
 		#Do stuff to manage unsuccessfull getMap
-	
+		try:
+			if "xml" in self.response.headers['Content-Type']:
+				# If the document returns a xml it means it failed
+				self.success = False
+		except:
+			pass
+
 	def saveImageAs(self, fileName, writeOver=True):
 		#TODO add option to writeOver or not
 		with open(fileName, 'wb') as f:
@@ -1035,17 +1043,17 @@ class LayerObject:
 		self.theStruct = theStruct
 		self.source = source
 		self.session = session
-		
+
 	def struct(self):
 		return self.theStruct
-	
+
 	def getMap(self, **kargs):
 		# This method returns a mapObject it simply does a wms.getmap with autofill on certain fields
-		params = {"layers":self.theStruct.name, 
-					"styles":self.theStruct.style[0].name,
-					"crs":self.theStruct.boundingBox[0].crs,
-					"bbox":"%s,%s,%s,%s"%(self.theStruct.boundingBox[0].minx, self.theStruct.boundingBox[0].miny, self.theStruct.boundingBox[0].maxx,self.theStruct.boundingBox[0].maxy)}
+		params = {"layers":self.theStruct.name,
+				  "styles":self.theStruct.style[0].name,
+				  "crs":self.theStruct.boundingBox[0].crs,
+				  "bbox":"%s,%s,%s,%s"%(self.theStruct.boundingBox[0].minx, self.theStruct.boundingBox[0].miny, self.theStruct.boundingBox[0].maxx,self.theStruct.boundingBox[0].maxy)}
 		params.update(kargs)
-		return self.session.getmap(self.source, **params) 
+		return self.session.getmap(self.source, **params)
 # REFS:
 # [1] : https://bugs.python.org/issue18304
